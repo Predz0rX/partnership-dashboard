@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predz Partnership Dashboard</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif; background: #1a1a2e; color: #eee; padding: 20px; }
+        .header { text-align: center; margin-bottom: 30px; }
+        .header h1 { font-size: 32px; margin-bottom: 8px; }
+        .header p { color: #b8336a; font-size: 14px; }
+        .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 30px; max-width: 900px; margin-left: auto; margin-right: auto; }
+        .stat-card { background: #16213e; border-radius: 12px; padding: 20px; text-align: center; border: 1px solid #0f3460; }
+        .stat-card .number { font-size: 36px; font-weight: bold; color: #b8336a; }
+        .stat-card .label { font-size: 13px; color: #aaa; margin-top: 5px; }
+        .section { max-width: 900px; margin: 0 auto 30px auto; }
+        .section h2 { font-size: 18px; margin-bottom: 15px; padding-bottom: 10px; border-bottom: 2px solid #b8336a; display: inline-block; }
+        table { width: 100%; border-collapse: collapse; }
+        th { background: #16213e; padding: 12px; text-align: left; font-size: 13px; color: #888; text-transform: uppercase; font-weight: 600; }
+        td { padding: 12px; border-bottom: 1px solid #0f3460; font-size: 14px; }
+        .badge { padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: bold; }
+        .badge-sent { background: #2d5a27; color: #7ee787; }
+        .badge-bounced { background: #5a2d2d; color: #ff9999; }
+        .badge-replied { background: #2d275a; color: #9990ff; }
+        .badge-scam { background: #5a2727; color: #ff7777; }
+        .badge-cancelled { background: #444; color: #aaa; }
+        .badge-pending { background: #5a5227; color: #ffd700; }
+        .brand-name { font-weight: bold; color: #fff; }
+        .brand-type { font-size: 12px; color: #888; }
+        .channel-tag { font-size: 10px; padding: 2px 6px; border-radius: 4px; margin-left: 5px; }
+        .tag-gaming { background: #b8336a; color: white; }
+        .tag-tech { background: #0f3460; color: #4fc3f7; }
+        .date-cell { color: #aaa; font-size: 12px; }
+        .notes { font-size: 12px; color: #888; font-style: italic; }
+        .email-cell { font-family: monospace; font-size: 12px; }
+        tr:hover td { background: rgba(184, 51, 106, 0.05); }
+    </style>
+<style>#pin-overlay{transition:opacity 0.4s ease}</style></head>
+<body>
+<div id="pin-overlay" style="position:fixed;top:0;left:0;width:100%;height:100%;background:#0a0a1a;z-index:9999;display:flex;align-items:center;justify-content:center;flex-direction:column;font-family:sans-serif;">
+    <div style="background:#16213e;padding:40px 50px;border-radius:16px;border:1px solid #b8336a;box-shadow:0 0 40px rgba(184,51,106,0.3);text-align:center;max-width:360px;width:90%;">
+        <div style="width:60px;height:60px;background:#b8336a;border-radius:50%;margin:0 auto 20px;display:flex;align-items:center;justify-content:center;font-size:28px;">🔒</div>
+        <h2 style="color:#fff;margin-bottom:8px;font-size:22px;">Partnership Dashboard</h2>
+        <p style="color:#888;font-size:13px;margin-bottom:25px;">Enter PIN to access</p>
+        <input id="pin-input" type="password" maxlength="10" placeholder="••••" style="background:#0a0a1a;border:2px solid #0f3460;border-radius:8px;padding:14px 20px;color:#fff;font-size:20px;text-align:center;letter-spacing:8px;width:100%;margin-bottom:15px;outline:none;transition:border-color 0.2s;" onkeydown="if(event.key==='Enter')checkPIN()">
+        <div id="pin-error" style="color:#ff7777;font-size:13px;height:20px;margin-bottom:10px;opacity:0;transition:opacity 0.3s;">Incorrect PIN</div>
+        <button onclick="checkPIN()" style="background:#b8336a;color:#fff;border:none;border-radius:8px;padding:14px 30px;font-size:15px;font-weight:600;cursor:pointer;width:100%;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">Unlock</button>
+        <div id="pin-attempts" style="color:#666;font-size:12px;margin-top:15px;">Attempts: <span id="attempt-count">0</span>/3</div>
+        <div id="pin-locked" style="color:#ff4444;font-size:13px;margin-top:10px;display:none;font-weight:bold;">🔒 Locked. Try again later.</div>
+    </div>
+    <p style="color:#333;font-size:11px;margin-top:20px;">Predz0rx · PredLabs</p>
+</div>
+<script>
+(function(){
+    'use strict';
+    const PIN_HASH = 'c96d630ec3a16ba4748b6ad7fad9e79f50cfc484037ef2d6e69268ccc70064ad';
+    let attempts = parseInt(sessionStorage.getItem('pin_attempts') || '0');
+    
+    function sha256(str) {
+        return crypto.subtle.digest('SHA-256', new TextEncoder().encode(str)).then(buf =>
+            Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('')
+        );
+    }
+    
+    window.checkPIN = async function() {
+        const input = document.getElementById('pin-input');
+        const error = document.getElementById('pin-error');
+        const locked = document.getElementById('pin-locked');
+        const count = document.getElementById('attempt-count');
+        
+        if (locked.style.display === 'block') return;
+        
+        const val = input.value.trim();
+        if (!val) {
+            error.textContent = 'Enter PIN'; error.style.opacity = '1'; return;
+        }
+        
+        const hash = await sha256(val);
+        if (hash === PIN_HASH) {
+            sessionStorage.setItem('pin_unlocked', '1');
+            document.getElementById('pin-overlay').style.opacity = '0';
+            setTimeout(() => document.getElementById('pin-overlay').remove(), 400);
+        } else {
+            attempts++;
+            sessionStorage.setItem('pin_attempts', String(attempts));
+            count.textContent = String(attempts);
+            error.style.opacity = '1';
+            input.value = '';
+            input.focus();
+            
+            if (attempts >= 3) {
+                input.disabled = true;
+                locked.style.display = 'block';
+                error.style.opacity = '0';
+                setTimeout(() => {
+                    attempts = 0;
+                    sessionStorage.setItem('pin_attempts', '0');
+                    input.disabled = false;
+                    locked.style.display = 'none';
+                    count.textContent = '0';
+                    input.focus();
+                }, 300000); // 5 minutes
+            }
+        }
+    };
+    
+    // Auto-unlock if already authenticated this session
+    if (sessionStorage.getItem('pin_unlocked') === '1') {
+        const ov = document.getElementById('pin-overlay');
+        if (ov) ov.remove();
+    }
+    
+    if (attempts >= 3) {
+        document.getElementById('pin-input').disabled = true;
+        document.getElementById('pin-locked').style.display = 'block';
+        document.getElementById('attempt-count').textContent = '3';
+    }
+})();
+</script>
+
+
+    <div class="header">
+        <h1>🎯 Predz Partnership Dashboard</h1>
+        <p>Last updated: 2026-05-21 | Cash/Hardware Only | No Keys, No Exposure</p>
+    </div>
+
+    <div class="stats-row">
+        <div class="stat-card">
+            <div class="number">13</div>
+            <div class="label">Outreach Sent</div>
+        </div>
+        <div class="stat-card">
+            <div class="number" style="color: #4fc3f7;">0</div>
+            <div class="label">Replies</div>
+        </div>
+        <div class="stat-card">
+            <div class="number" style="color: #ff9999;">2</div>
+            <div class="label">Bounced</div>
+        </div>
+        <div class="stat-card">
+            <div class="number" style="color: #ffd700;">3</div>
+            <div class="label">Scam Baits</div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>🟢 Hardware Brands (7)</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Brand</th>
+                    <th>Email</th>
+                    <th>Channel</th>
+                    <th>Sent</th>
+                    <th>Status</th>
+                    <th>Notes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="brand-name">Elgato</div>
+                        <div class="brand-type">Capture / Streaming</div>
+                    </td>
+                    <td class="email-cell">mediarelations@elgato.com</td>
+                    <td><span class="channel-tag tag-tech">PredLabs</span></td>
+                    <td class="date-cell">May 21 (v1+v2+v3)</td>
+                    <td><span class="badge badge-sent">SENT x3</span></td>
+                    <td class="notes">3 emails sent. Awaiting response.</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="brand-name">SteelSeries</div>
+                        <div class="brand-type">Headsets / Mice / Keyboards</div>
+                    </td>
+                    <td class="email-cell">press@steelseries.com</td>
+                    <td><span class="channel-tag tag-gaming">Predz0rx</span></td>
+                    <td class="date-cell">May 21 (v2+v3)</td>
+                    <td><span class="badge badge-sent">SENT</span></td>
+                    <td class="notes">Fixed version sent.</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="brand-name">HyperX</div>
+                        <div class="brand-type">Headsets / Mice / Keyboards</div>
+                    </td>
+                    <td class="email-cell">press@hyperx.com</td>
+                    <td><span class="channel-tag tag-gaming">Predz0rx</span></td>
+                    <td class="date-cell">May 21 (v2+v3)</td>
+                    <td><span class="badge badge-sent">SENT</span></td>
+                    <td class="notes">Fixed version sent.</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="brand-name">AMD</div>
+                        <div class="brand-type">GPUs / CPUs</div>
+                    </td>
+                    <td class="email-cell">redteam@amd.com</td>
+                    <td><span class="channel-tag tag-gaming">Predz0rx</span></td>
+                    <td class="date-cell">May 21 (v2+v3)</td>
+                    <td><span class="badge badge-sent">SENT</span></td>
+                    <td class="notes">Fixed version sent.</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="brand-name">NVIDIA</div>
+                        <div class="brand-type">GPUs / AI Workflows</div>
+                    </td>
+                    <td class="email-cell">press@nvidia.com</td>
+                    <td><span class="channel-tag tag-tech">PredLabs</span></td>
+                    <td class="date-cell">May 21 (v2+v3)</td>
+                    <td><span class="badge badge-sent">SENT</span></td>
+                    <td class="notes">creators@nvidia.com bounced. Resent to press@nvidia.com</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="brand-name">DJI</div>
+                        <div class="brand-type">Cameras / Creator Tech</div>
+                    </td>
+                    <td class="email-cell">press@dji.com</td>
+                    <td><span class="channel-tag tag-tech">PredLabs</span></td>
+                    <td class="date-cell">May 21 (v2+v3)</td>
+                    <td><span class="badge badge-sent">SENT</span></td>
+                    <td class="notes">Fixed version sent.</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="brand-name">Secretlab</div>
+                        <div class="brand-type">Gaming Chairs</div>
+                    </td>
+                    <td class="email-cell">press@secretlab.co</td>
+                    <td><span class="channel-tag tag-gaming">Predz0rx</span></td>
+                    <td class="date-cell">May 21 (v3)</td>
+                    <td><span class="badge badge-sent">SENT</span></td>
+                    <td class="notes">creators@secretlab.com bounced. Resent to press@secretlab.co</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>🔵 Software / VPN / Creator Tools (6)</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Brand</th>
+                    <th>Email</th>
+                    <th>Channel</th>
+                    <th>Sent</th>
+                    <th>Status</th>
+                    <th>Notes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="brand-name">Razer</div>
+                        <div class="brand-type">Gaming Peripherals</div>
+                    </td>
+                    <td class="email-cell">press@razer.com</td>
+                    <td><span class="channel-tag tag-gaming">Predz0rx</span></td>
+                    <td class="date-cell">May 21</td>
+                    <td><span class="badge badge-sent">SENT</span></td>
+                    <td class="notes">Chroma ecosystem angle.</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="brand-name">Logitech</div>
+                        <div class="brand-type">Gaming / Audio Peripherals</div>
+                    </td>
+                    <td class="email-cell">press@logitech.com</td>
+                    <td><span class="channel-tag tag-gaming">Predz0rx</span></td>
+                    <td class="date-cell">May 21</td>
+                    <td><span class="badge badge-sent">SENT</span></td>
+                    <td class="notes">G Pro + Blue Yeti angle.</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="brand-name">NordVPN</div>
+                        <div class="brand-type">VPN Software</div>
+                    </td>
+                    <td class="email-cell">affiliates@nordvpn.com</td>
+                    <td><span class="channel-tag tag-tech">PredLabs</span></td>
+                    <td class="date-cell">May 21</td>
+                    <td><span class="badge badge-sent">SENT</span></td>
+                    <td class="notes">Gaming privacy + region unlocks.</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="brand-name">NZXT</div>
+                        <div class="brand-type">PC Cases / Streaming HW</div>
+                    </td>
+                    <td class="email-cell">press@nzxt.com</td>
+                    <td><span class="channel-tag tag-tech">PredLabs</span></td>
+                    <td class="date-cell">May 21</td>
+                    <td><span class="badge badge-sent">SENT</span></td>
+                    <td class="notes">H-series + Flex subscription angle.</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="brand-name">Streamlabs</div>
+                        <div class="brand-type">Streaming Software</div>
+                    </td>
+                    <td class="email-cell">creators@streamlabs.com</td>
+                    <td><span class="channel-tag tag-tech">PredLabs</span></td>
+                    <td class="date-cell">May 21</td>
+                    <td><span class="badge badge-sent">SENT</span></td>
+                    <td class="notes">Tutorials + OBS integration.</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="brand-name">StreamElements</div>
+                        <div class="brand-type">Streaming Overlays / OBS Plugins</div>
+                    </td>
+                    <td class="email-cell">partners@streamelements.com</td>
+                    <td><span class="channel-tag tag-tech">PredLabs</span></td>
+                    <td class="date-cell">May 21</td>
+                    <td><span class="badge badge-sent">SENT</span></td>
+                    <td class="notes">OBS.Live + overlays coverage.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>🟡 Scam Bait Operations (3)</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Sender</th>
+                    <th>Email</th>
+                    <th>Verdict</th>
+                    <th>Status</th>
+                    <th>Intel Gathered</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>ID-001</td>
+                    <td><div class="brand-name">SparkHub Media</div><div class="brand-type">Paid YouTube Campaign</div></td>
+                    <td class="email-cell">xiaoke@sparkhub.media</td>
+                    <td><span class="badge badge-scam">SCAM</span></td>
+                    <td class="date-cell">Bait sent May 21</td>
+                    <td class="notes">Awaiting: brand name, rates, payment method, sample request</td>
+                </tr>
+                <tr>
+                    <td>ID-002</td>
+                    <td><div class="brand-name">Redhead Digital / CollabOffer</div><div class="brand-type">Guest Post / Backlinks</div></td>
+                    <td class="email-cell">veta.higgins@collaboffer.com</td>
+                    <td><span class="badge badge-pending">REAL/LOW</span></td>
+                    <td class="date-cell">Bait sent May 21</td>
+                    <td class="notes">Awaiting: rates, content requirements, process. Backlink seller, low value.</td>
+                </tr>
+                <tr>
+                    <td>ID-003</td>
+                    <td><div class="brand-name">Shure Media (Andrew)</div><div class="brand-type">Integration Fee</div></td>
+                    <td class="email-cell">a01094401991@gmail.com</div></td>
+                    <td><span class="badge badge-pending">SUSPICIOUS</span></td>
+                    <td class="date-cell">Bait sent May 21</td>
+                    <td class="notes">Awaiting: real @shuremedia.com email, fee range, product name. Contact from Gmail, NOT domain.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>🔴 Cancelled / Low Value</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Brand</th>
+                    <th>Type</th>
+                    <th>Reason</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Keymailer / Kabam</td>
+                    <td>Game Keys</td>
+                    <td class="notes">Free key only. No cash. No hardware. Not worth time.</td>
+                </tr>
+                <tr>
+                    <td>Streamers Connected</td>
+                    <td>Co-stream Events</td>
+                    <td class="notes">Exposure only. No direct monetization. Not worth time.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>📋 Pipeline: Next Batch (Ready to Contact)</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Brand</th>
+                    <th>Type</th>
+                    <th>Why Target</th>
+                    <th>Next Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>ExpressVPN</td>
+                    <td>VPN Software</td>
+                    <td class="notes">Premium VPN, pays well per conversion. Gaming region unlocks.</td>
+                    <td>Wait for NordVPN response first</td>
+                </tr>
+                <tr>
+                    <td>Surfshark</td>
+                    <td>VPN Software</td>
+                    <td class="notes">Aggressive with creator partnerships. Good affiliate rates.</td>
+                    <td>Wait for NordVPN response first</td>
+                </tr>
+                <tr>
+                    <td>Grammarly</td>
+                    <td>Writing Tool</td>
+                    <td class="notes">Massive affiliate program. Pays per conversion. Good for tech channel.</td>
+                    <td>Draft template</td>
+                </tr>
+                <tr>
+                    <td>Canva</td>
+                    <td>Design Tool</td>
+                    <td class="notes">Perfect for creator tutorials. Thumbnails, thumbnails, social media.</td>
+                    <td>Draft template</td>
+                </tr>
+                <tr>
+                    <td>1Password</td>
+                    <td>Password Manager</td>
+                    <td class="notes">Security angle for tech channel. Team plans, family sharing.</td>
+                    <td>Draft template</td>
+                </tr>
+                <tr>
+                    <td>Corsair</td>
+                    <td>PC Hardware/Peripherals</td>
+                    <td class="notes">K70 keyboards, streaming gear. High-value for gaming PC builds.</td>
+                    <td>Draft template on request</td>
+                </tr>
+                <tr>
+                    <td>Malwarebytes</td>
+                    <td>Antivirus Software</td>
+                    <td class="notes">Gaming PC protection angle. Good affiliate payouts.</td>
+                    <td>Draft template on request</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="section" style="text-align: center; margin-top: 40px; padding: 20px; border-radius: 12px; background: #16213e;">
+        <p style="color: #888; font-size: 12px;">
+            ⚠️ Cash/Hardware only. No game keys. No "exposure". No co-streams without pay.<br>
+            Scam baits active: 3 | Auto-scan: Daily 11 AM EST | Last sent batch: May 21, 2026
+        </p>
+    </div>
+
+</body>
+</html>
