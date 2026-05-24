@@ -1,459 +1,409 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Predz Partnership Dashboard</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif; background: #1a1a2e; color: #eee; padding: 20px; }
-        .header { text-align: center; margin-bottom: 30px; }
-        .header h1 { font-size: 32px; margin-bottom: 8px; }
-        .header p { color: #b8336a; font-size: 14px; }
-        .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 30px; max-width: 900px; margin-left: auto; margin-right: auto; }
-        .stat-card { background: #16213e; border-radius: 12px; padding: 20px; text-align: center; border: 1px solid #0f3460; }
-        .stat-card .number { font-size: 36px; font-weight: bold; color: #b8336a; }
-        .stat-card .label { font-size: 13px; color: #aaa; margin-top: 5px; }
-        .section { max-width: 900px; margin: 0 auto 30px auto; }
-        .section h2 { font-size: 18px; margin-bottom: 15px; padding-bottom: 10px; border-bottom: 2px solid #b8336a; display: inline-block; }
-        table { width: 100%; border-collapse: collapse; }
-        th { background: #16213e; padding: 12px; text-align: left; font-size: 13px; color: #888; text-transform: uppercase; font-weight: 600; }
-        td { padding: 12px; border-bottom: 1px solid #0f3460; font-size: 14px; }
-        .badge { padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: bold; }
-        .badge-sent { background: #2d5a27; color: #7ee787; }
-        .badge-bounced { background: #5a2d2d; color: #ff9999; }
-        .badge-replied { background: #2d275a; color: #9990ff; }
-        .badge-scam { background: #5a2727; color: #ff7777; }
-        .badge-cancelled { background: #444; color: #aaa; }
-        .badge-pending { background: #5a5227; color: #ffd700; }
-        .brand-name { font-weight: bold; color: #fff; }
-        .brand-type { font-size: 12px; color: #888; }
-        .channel-tag { font-size: 10px; padding: 2px 6px; border-radius: 4px; margin-left: 5px; }
-        .tag-gaming { background: #b8336a; color: white; }
-        .tag-tech { background: #0f3460; color: #4fc3f7; }
-        .date-cell { color: #aaa; font-size: 12px; }
-        .notes { font-size: 12px; color: #888; font-style: italic; }
-        .email-cell { font-family: monospace; font-size: 12px; }
-        tr:hover td { background: rgba(184, 51, 106, 0.05); }
-    </style>
-<style>#pin-overlay{transition:opacity 0.4s ease}</style></head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Predz0rx — X Posts Preview</title>
+<style>
+  :root {
+    --bg:       #000000;
+    --card:     #16181c;
+    --border:   #2f3336;
+    --text:     #e7e9ea;
+    --muted:    #71767b;
+    --blue:     #1d9bf0;
+    --green:    #00ba7c;
+    --pink:     #b8336a;
+    --red:      #f4212e;
+    --warning:  #ffad1f;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    padding: 16px;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  header {
+    text-align: center;
+    padding: 12px 0 20px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 16px;
+  }
+  header h1 { font-size: 20px; font-weight: 700; }
+  header p  { color: var(--muted); font-size: 14px; margin-top: 4px; }
+  .sponsor-badge {
+    display: inline-block;
+    background: var(--pink);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-top: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .week-label {
+    color: var(--muted);
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin: 24px 0 12px;
+    padding-left: 8px;
+    border-left: 3px solid var(--blue);
+  }
+
+  .tweet {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 16px;
+    margin-bottom: 16px;
+    transition: border-color 0.2s;
+  }
+  .tweet:hover { border-color: var(--border); }
+
+  .tweet-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  .avatar {
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #b8336a, #1d9bf0);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 18px; color: #fff;
+    flex-shrink: 0;
+  }
+  .tweet-meta { flex: 1; min-width: 0; }
+  .display-name {
+    font-weight: 700; font-size: 15px;
+    display: flex; align-items: center; gap: 4px;
+  }
+  .verified { color: var(--blue); font-size: 16px; }
+  .handle { color: var(--muted); font-size: 15px; }
+  .sponsored-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+    color: var(--pink);
+    font-weight: 600;
+    margin-top: 2px;
+  }
+
+  .tweet-body {
+    font-size: 15px;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    margin-bottom: 12px;
+  }
+  .tweet-body a { color: var(--blue); text-decoration: none; }
+  .tweet-body a:hover { text-decoration: underline; }
+  .hashtag { color: var(--blue); }
+  .mention { color: var(--blue); }
+
+  .tweet-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid var(--border);
+    padding-top: 12px;
+  }
+  .char-count {
+    font-size: 13px;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+  }
+  .char-count.ok   { color: var(--muted); }
+  .char-count.warn { color: var(--warning); }
+  .char-count.over { color: var(--red); }
+
+  .actions {
+    display: flex;
+    gap: 16px;
+    color: var(--muted);
+    font-size: 13px;
+  }
+  .actions span { display: flex; align-items: center; gap: 4px; }
+
+  .status-bar {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    background: var(--card);
+    border-top: 1px solid var(--border);
+    padding: 12px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+  }
+  .status-bar .left { color: var(--muted); }
+  .status-bar .right {
+    display: flex;
+    gap: 12px;
+  }
+  .status-bar .btn {
+    background: var(--blue);
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 9999px;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  .status-bar .btn.secondary {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+</style>
+</head>
 <body>
-<div id="pin-overlay" style="position:fixed;top:0;left:0;width:100%;height:100%;background:#0a0a1a;z-index:9999;display:flex;align-items:center;justify-content:center;flex-direction:column;font-family:sans-serif;">
-    <div style="background:#16213e;padding:40px 50px;border-radius:16px;border:1px solid #b8336a;box-shadow:0 0 40px rgba(184,51,106,0.3);text-align:center;max-width:360px;width:90%;">
-        <div style="width:60px;height:60px;background:#b8336a;border-radius:50%;margin:0 auto 20px;display:flex;align-items:center;justify-content:center;font-size:28px;">🔒</div>
-        <h2 style="color:#fff;margin-bottom:8px;font-size:22px;">Partnership Dashboard</h2>
-        <p style="color:#888;font-size:13px;margin-bottom:25px;">Enter PIN to access</p>
-        <input id="pin-input" type="password" maxlength="10" placeholder="••••" style="background:#0a0a1a;border:2px solid #0f3460;border-radius:8px;padding:14px 20px;color:#fff;font-size:20px;text-align:center;letter-spacing:8px;width:100%;margin-bottom:15px;outline:none;transition:border-color 0.2s;" onkeydown="if(event.key==='Enter')checkPIN()">
-        <div id="pin-error" style="color:#ff7777;font-size:13px;height:20px;margin-bottom:10px;opacity:0;transition:opacity 0.3s;">Incorrect PIN</div>
-        <button onclick="checkPIN()" style="background:#b8336a;color:#fff;border:none;border-radius:8px;padding:14px 30px;font-size:15px;font-weight:600;cursor:pointer;width:100%;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">Unlock</button>
-        <div id="pin-attempts" style="color:#666;font-size:12px;margin-top:15px;">Attempts: <span id="attempt-count">0</span>/3</div>
-        <div id="pin-locked" style="color:#ff4444;font-size:13px;margin-top:10px;display:none;font-weight:bold;">🔒 Locked. Try again later.</div>
+
+<header>
+  <h1>@predz0rx — Sponsored Posts</h1>
+  <p>YGG_PLAY Campaign · 4 Weeks · Draft Preview</p>
+  <span class="sponsor-badge">Sponsored</span>
+</header>
+
+<!-- POST 1 -->
+<div class="week-label">Week 1 — AI x Vibe Coding</div>
+<div class="tweet" id="post1">
+  <div class="tweet-header">
+    <div class="avatar">P</div>
+    <div class="tweet-meta">
+      <div class="display-name">Predz <span class="verified">&#x2714;&#xFE0F;</span></div>
+      <div class="handle">@predz0rx</div>
+      <div class="sponsored-pill">&#x1F4B0; Paid partnership with @YGG_Play</div>
     </div>
-    <p style="color:#333;font-size:11px;margin-top:20px;">Predz0rx · PredLabs</p>
+  </div>
+  <div class="tweet-body" id="body1">I spend my days building content with AI.
+
+YGG Play spends theirs building games with AI.
+
+They call it "vibe coding" — an explosion of casual games built with LLM assistance.
+
+Same tools I use for my videos.
+Same pipeline. Different output.
+
+YGG Play is not another web3 game studio trying to make the next AAA shooter.
+
+They publish casual degen games.
+Tap. Swipe. Win.
+
+LOL Land. Waifu Sweeper. GIGA CHAT BAT.
+
+Games your mom could play but your degen uncle would max out with leverage.
+
+They hit #3 on BlockchainGamer.biz top 50 list this quarter.
+Not from hype. From shipping actual games people play.
+
+I respect builders who ship.
+That is why I partnered with @YGG_Play.
+
+If you vibe code, if you degen trade, if you think AI should work for you not replace you, you need to see what they are building.
+
+Link in bio. Tell them Predz sent you.
+
+<span class="hashtag">#YGG</span> <span class="hashtag">#YGGPlay</span> <span class="hashtag">#sponsored</span> <span class="hashtag">#vibecoding</span></div>
+  <div class="tweet-footer">
+    <span class="char-count ok" id="count1">0 / 280</span>
+    <div class="actions">
+      <span>&#x1F4AC; 0</span>
+      <span>&#x1F501; 0</span>
+      <span>&#x2764;&#xFE0F; 0</span>
+      <span>&#x1F4C8; 0</span>
+    </div>
+  </div>
 </div>
+
+<!-- POST 2 -->
+<div class="week-label">Week 2 — Token Economics</div>
+<div class="tweet" id="post2">
+  <div class="tweet-header">
+    <div class="avatar">P</div>
+    <div class="tweet-meta">
+      <div class="display-name">Predz <span class="verified">&#x2714;&#xFE0F;</span></div>
+      <div class="handle">@predz0rx</div>
+      <div class="sponsored-pill">&#x1F4B0; Paid partnership with @YGG_Play</div>
+    </div>
+  </div>
+  <div class="tweet-body" id="body2">I have opened 400+ CS2 cases in my life.
+
+Total return? A Stattrak Tec-9 worth $12.
+
+Meanwhile @YGG_Play just dropped $CHAD Token.
+
+Play-to-Airdrop. Points Boost on the Launchpad.
+Token allocations based on actual grinding.
+
+Their system: play casual degen games, earn points, boost your allocation, claim tokens.
+
+Not hope. Not luck. Not "maybe tomorrow I get the knife."
+
+Actual measurable upside from playtime.
+
+Roach Race. Proof of Play. Gigaverse.
+
+I would rather grind Roach Racing Club and know exactly what my points get me than open another case praying for a red.
+
+Here is the thing Valve will never admit:
+casual games with token mechanics are more honest lootboxes.
+
+At least you know the math.
+
+YGG Play is my sponsor because their economy makes sense.
+
+Drop a reply if you have ever done the case opening depression spiral.
+
+<span class="hashtag">#YGG</span> <span class="hashtag">#YGGPlay</span> <span class="hashtag">#CHADToken</span> <span class="hashtag">#sponsored</span></div>
+  <div class="tweet-footer">
+    <span class="char-count ok" id="count2">0 / 280</span>
+    <div class="actions">
+      <span>&#x1F4AC; 0</span>
+      <span>&#x1F501; 0</span>
+      <span>&#x2764;&#xFE0F; 0</span>
+      <span>&#x1F4C8; 0</span>
+    </div>
+  </div>
+</div>
+
+<!-- POST 3 -->
+<div class="week-label">Week 3 — Community / Creator Program</div>
+<div class="tweet" id="post3">
+  <div class="tweet-header">
+    <div class="avatar">P</div>
+    <div class="tweet-meta">
+      <div class="display-name">Predz <span class="verified">&#x2714;&#xFE0F;</span></div>
+      <div class="handle">@predz0rx</div>
+      <div class="sponsored-pill">&#x1F4B0; Paid partnership with @YGG_Play</div>
+    </div>
+  </div>
+  <div class="tweet-body" id="body3">5 years ago I had 20 people in a CS:S server.
+
+Today Old School Club is 3200+ deep.
+
+Same energy. Same grind.
+
+But @YGG_Play built something I could never scale alone:
+
+Launchpad infrastructure. Creator program. Actual rewards for driving players.
+
+I run a community. They run the system that funds communities.
+
+Their hackathon with Verse8 during Korea Buidl Week produced games I am already testing.
+
+Their Creator Program is looking for people with exactly what I have:
+a group that actually shows up.
+
+If you are an Old School member, this is not generic sponsor talk.
+
+This is a direct pipeline for our community to get early access, token allocations, and tournament slots through YGG Play.
+
+Community plus platform equals outcome.
+
+That is what I am building.
+
+Reply "YGG" below and I will DM you the early sign-up link.
+
+<span class="hashtag">#OldSchoolClub</span> <span class="hashtag">#YGGPlay</span> <span class="hashtag">#sponsored</span> <span class="hashtag">#creatoreconomy</span></div>
+  <div class="tweet-footer">
+    <span class="char-count ok" id="count3">0 / 280</span>
+    <div class="actions">
+      <span>&#x1F4AC; 0</span>
+      <span>&#x1F501; 0</span>
+      <span>&#x2764;&#xFE0F; 0</span>
+      <span>&#x1F4C8; 0</span>
+    </div>
+  </div>
+</div>
+
+<!-- POST 4 -->
+<div class="week-label">Week 4 — IP Crossover / Cultural</div>
+<div class="tweet" id="post4">
+  <div class="tweet-header">
+    <div class="avatar">P</div>
+    <div class="tweet-meta">
+      <div class="display-name">Predz <span class="verified">&#x2714;&#xFE0F;</span></div>
+      <div class="handle">@predz0rx</div>
+      <div class="sponsored-pill">&#x1F4B0; Paid partnership with @YGG_Play</div>
+    </div>
+  </div>
+  <div class="tweet-body" id="body4">YGG Play does crossovers that actually hit.
+
+Not the lazy "skin collab" every shooter does in season 5.
+
+Their baseball game GIGA CHAT BAT partnered with Bearish AF, the biggest IP on Abstract after Pudgy Penguins.
+
+Waifu Sweeper showed up at Hypebeast's 20th anniversary exhibition in Hong Kong luxury retail.
+
+This is degen culture meeting the mainstream without selling out.
+
+They understand what their players actually care about.
+Meme IP. Luxury crossovers. Games that feel native to the platforms people already use.
+
+I have seen too many web3 games fail because they wanted to be everything and ended up nothing.
+
+YGG Play picked their lane:
+casual games. degen outcomes. cultural collabs.
+
+And they stayed in it.
+
+That is why they are my sponsor. Not because they are the biggest. Because they actually know who they are.
+
+What crossover game would you actually play?
+
+<span class="hashtag">#YGGPlay</span> <span class="hashtag">#GIGACHADBAT</span> <span class="hashtag">#BearishAF</span> <span class="hashtag">#sponsored</span></div>
+  <div class="tweet-footer">
+    <span class="char-count ok" id="count4">0 / 280</span>
+    <div class="actions">
+      <span>&#x1F4AC; 0</span>
+      <span>&#x1F501; 0</span>
+      <span>&#x2764;&#xFE0F; 0</span>
+      <span>&#x1F4C8; 0</span>
+    </div>
+  </div>
+</div>
+
+<div style="height:80px;"></div>
+
+<div class="status-bar">
+  <div class="left">4 drafts ready</div>
+  <div class="right">
+    <button class="btn secondary" onclick="window.location.reload()">Refresh</button>
+    <button class="btn" onclick="alert('Copy each post manually and paste into X.')">Copy All</button>
+  </div>
+</div>
+
 <script>
-(function(){
-    'use strict';
-    const PIN_HASH = 'c96d630ec3a16ba4748b6ad7fad9e79f50cfc484037ef2d6e69268ccc70064ad';
-    let attempts = parseInt(sessionStorage.getItem('pin_attempts') || '0');
-    
-    function sha256(str) {
-        return crypto.subtle.digest('SHA-256', new TextEncoder().encode(str)).then(buf =>
-            Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('')
-        );
-    }
-    
-    window.checkPIN = async function() {
-        const input = document.getElementById('pin-input');
-        const error = document.getElementById('pin-error');
-        const locked = document.getElementById('pin-locked');
-        const count = document.getElementById('attempt-count');
-        
-        if (locked.style.display === 'block') return;
-        
-        const val = input.value.trim();
-        if (!val) {
-            error.textContent = 'Enter PIN'; error.style.opacity = '1'; return;
-        }
-        
-        const hash = await sha256(val);
-        if (hash === PIN_HASH) {
-            sessionStorage.setItem('pin_unlocked', '1');
-            document.getElementById('pin-overlay').style.opacity = '0';
-            setTimeout(() => document.getElementById('pin-overlay').remove(), 400);
-        } else {
-            attempts++;
-            sessionStorage.setItem('pin_attempts', String(attempts));
-            count.textContent = String(attempts);
-            error.style.opacity = '1';
-            input.value = '';
-            input.focus();
-            
-            if (attempts >= 3) {
-                input.disabled = true;
-                locked.style.display = 'block';
-                error.style.opacity = '0';
-                setTimeout(() => {
-                    attempts = 0;
-                    sessionStorage.setItem('pin_attempts', '0');
-                    input.disabled = false;
-                    locked.style.display = 'none';
-                    count.textContent = '0';
-                    input.focus();
-                }, 300000); // 5 minutes
-            }
-        }
-    };
-    
-    // Auto-unlock if already authenticated this session
-    if (sessionStorage.getItem('pin_unlocked') === '1') {
-        const ov = document.getElementById('pin-overlay');
-        if (ov) ov.remove();
-    }
-    
-    if (attempts >= 3) {
-        document.getElementById('pin-input').disabled = true;
-        document.getElementById('pin-locked').style.display = 'block';
-        document.getElementById('attempt-count').textContent = '3';
-    }
-})();
+  function countChars(elId, countId) {
+    const body = document.getElementById(elId).innerText;
+    // Strip HTML tags for count
+    const clean = body.replace(/<[^>]*>/g, '');
+    const len = clean.length;
+    const el = document.getElementById(countId);
+    el.textContent = len + ' / 280';
+    if (len > 280) { el.className = 'char-count over'; }
+    else if (len > 250) { el.className = 'char-count warn'; }
+    else { el.className = 'char-count ok'; }
+  }
+
+  countChars('body1', 'count1');
+  countChars('body2', 'count2');
+  countChars('body3', 'count3');
+  countChars('body4', 'count4');
 </script>
-
-
-    <div class="header">
-        <h1>🎯 Predz Partnership Dashboard</h1>
-        <p>Last updated: 2026-05-21 | Cash/Hardware Only | No Keys, No Exposure</p>
-    </div>
-
-    <div class="stats-row">
-        <div class="stat-card">
-            <div class="number">13</div>
-            <div class="label">Outreach Sent</div>
-        </div>
-        <div class="stat-card">
-            <div class="number" style="color: #4fc3f7;">0</div>
-            <div class="label">Replies</div>
-        </div>
-        <div class="stat-card">
-            <div class="number" style="color: #ff9999;">2</div>
-            <div class="label">Bounced</div>
-        </div>
-        <div class="stat-card">
-            <div class="number" style="color: #ffd700;">3</div>
-            <div class="label">Scam Baits</div>
-        </div>
-    </div>
-
-    <div class="section">
-        <h2>🟢 Hardware Brands (7)</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Brand</th>
-                    <th>Email</th>
-                    <th>Channel</th>
-                    <th>Sent</th>
-                    <th>Status</th>
-                    <th>Notes</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>
-                        <div class="brand-name">Elgato</div>
-                        <div class="brand-type">Capture / Streaming</div>
-                    </td>
-                    <td class="email-cell">mediarelations@elgato.com</td>
-                    <td><span class="channel-tag tag-tech">PredLabs</span></td>
-                    <td class="date-cell">May 21 (v1+v2+v3)</td>
-                    <td><span class="badge badge-sent">SENT x3</span></td>
-                    <td class="notes">3 emails sent. Awaiting response.</td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="brand-name">SteelSeries</div>
-                        <div class="brand-type">Headsets / Mice / Keyboards</div>
-                    </td>
-                    <td class="email-cell">press@steelseries.com</td>
-                    <td><span class="channel-tag tag-gaming">Predz0rx</span></td>
-                    <td class="date-cell">May 21 (v2+v3)</td>
-                    <td><span class="badge badge-sent">SENT</span></td>
-                    <td class="notes">Fixed version sent.</td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="brand-name">HyperX</div>
-                        <div class="brand-type">Headsets / Mice / Keyboards</div>
-                    </td>
-                    <td class="email-cell">press@hyperx.com</td>
-                    <td><span class="channel-tag tag-gaming">Predz0rx</span></td>
-                    <td class="date-cell">May 21 (v2+v3)</td>
-                    <td><span class="badge badge-sent">SENT</span></td>
-                    <td class="notes">Fixed version sent.</td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="brand-name">AMD</div>
-                        <div class="brand-type">GPUs / CPUs</div>
-                    </td>
-                    <td class="email-cell">redteam@amd.com</td>
-                    <td><span class="channel-tag tag-gaming">Predz0rx</span></td>
-                    <td class="date-cell">May 21 (v2+v3)</td>
-                    <td><span class="badge badge-sent">SENT</span></td>
-                    <td class="notes">Fixed version sent.</td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="brand-name">NVIDIA</div>
-                        <div class="brand-type">GPUs / AI Workflows</div>
-                    </td>
-                    <td class="email-cell">press@nvidia.com</td>
-                    <td><span class="channel-tag tag-tech">PredLabs</span></td>
-                    <td class="date-cell">May 21 (v2+v3)</td>
-                    <td><span class="badge badge-sent">SENT</span></td>
-                    <td class="notes">creators@nvidia.com bounced. Resent to press@nvidia.com</td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="brand-name">DJI</div>
-                        <div class="brand-type">Cameras / Creator Tech</div>
-                    </td>
-                    <td class="email-cell">press@dji.com</td>
-                    <td><span class="channel-tag tag-tech">PredLabs</span></td>
-                    <td class="date-cell">May 21 (v2+v3)</td>
-                    <td><span class="badge badge-sent">SENT</span></td>
-                    <td class="notes">Fixed version sent.</td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="brand-name">Secretlab</div>
-                        <div class="brand-type">Gaming Chairs</div>
-                    </td>
-                    <td class="email-cell">press@secretlab.co</td>
-                    <td><span class="channel-tag tag-gaming">Predz0rx</span></td>
-                    <td class="date-cell">May 21 (v3)</td>
-                    <td><span class="badge badge-sent">SENT</span></td>
-                    <td class="notes">creators@secretlab.com bounced. Resent to press@secretlab.co</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <div class="section">
-        <h2>🔵 Software / VPN / Creator Tools (6)</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Brand</th>
-                    <th>Email</th>
-                    <th>Channel</th>
-                    <th>Sent</th>
-                    <th>Status</th>
-                    <th>Notes</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>
-                        <div class="brand-name">Razer</div>
-                        <div class="brand-type">Gaming Peripherals</div>
-                    </td>
-                    <td class="email-cell">press@razer.com</td>
-                    <td><span class="channel-tag tag-gaming">Predz0rx</span></td>
-                    <td class="date-cell">May 21</td>
-                    <td><span class="badge badge-sent">SENT</span></td>
-                    <td class="notes">Chroma ecosystem angle.</td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="brand-name">Logitech</div>
-                        <div class="brand-type">Gaming / Audio Peripherals</div>
-                    </td>
-                    <td class="email-cell">press@logitech.com</td>
-                    <td><span class="channel-tag tag-gaming">Predz0rx</span></td>
-                    <td class="date-cell">May 21</td>
-                    <td><span class="badge badge-sent">SENT</span></td>
-                    <td class="notes">G Pro + Blue Yeti angle.</td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="brand-name">NordVPN</div>
-                        <div class="brand-type">VPN Software</div>
-                    </td>
-                    <td class="email-cell">affiliates@nordvpn.com</td>
-                    <td><span class="channel-tag tag-tech">PredLabs</span></td>
-                    <td class="date-cell">May 21</td>
-                    <td><span class="badge badge-sent">SENT</span></td>
-                    <td class="notes">Gaming privacy + region unlocks.</td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="brand-name">NZXT</div>
-                        <div class="brand-type">PC Cases / Streaming HW</div>
-                    </td>
-                    <td class="email-cell">press@nzxt.com</td>
-                    <td><span class="channel-tag tag-tech">PredLabs</span></td>
-                    <td class="date-cell">May 21</td>
-                    <td><span class="badge badge-sent">SENT</span></td>
-                    <td class="notes">H-series + Flex subscription angle.</td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="brand-name">Streamlabs</div>
-                        <div class="brand-type">Streaming Software</div>
-                    </td>
-                    <td class="email-cell">creators@streamlabs.com</td>
-                    <td><span class="channel-tag tag-tech">PredLabs</span></td>
-                    <td class="date-cell">May 21</td>
-                    <td><span class="badge badge-sent">SENT</span></td>
-                    <td class="notes">Tutorials + OBS integration.</td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="brand-name">StreamElements</div>
-                        <div class="brand-type">Streaming Overlays / OBS Plugins</div>
-                    </td>
-                    <td class="email-cell">partners@streamelements.com</td>
-                    <td><span class="channel-tag tag-tech">PredLabs</span></td>
-                    <td class="date-cell">May 21</td>
-                    <td><span class="badge badge-sent">SENT</span></td>
-                    <td class="notes">OBS.Live + overlays coverage.</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <div class="section">
-        <h2>🟡 Scam Bait Operations (3)</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Sender</th>
-                    <th>Email</th>
-                    <th>Verdict</th>
-                    <th>Status</th>
-                    <th>Intel Gathered</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>ID-001</td>
-                    <td><div class="brand-name">SparkHub Media</div><div class="brand-type">Paid YouTube Campaign</div></td>
-                    <td class="email-cell">xiaoke@sparkhub.media</td>
-                    <td><span class="badge badge-scam">SCAM</span></td>
-                    <td class="date-cell">Bait sent May 21</td>
-                    <td class="notes">Awaiting: brand name, rates, payment method, sample request</td>
-                </tr>
-                <tr>
-                    <td>ID-002</td>
-                    <td><div class="brand-name">Redhead Digital / CollabOffer</div><div class="brand-type">Guest Post / Backlinks</div></td>
-                    <td class="email-cell">veta.higgins@collaboffer.com</td>
-                    <td><span class="badge badge-pending">REAL/LOW</span></td>
-                    <td class="date-cell">Bait sent May 21</td>
-                    <td class="notes">Awaiting: rates, content requirements, process. Backlink seller, low value.</td>
-                </tr>
-                <tr>
-                    <td>ID-003</td>
-                    <td><div class="brand-name">Shure Media (Andrew)</div><div class="brand-type">Integration Fee</div></td>
-                    <td class="email-cell">a01094401991@gmail.com</div></td>
-                    <td><span class="badge badge-pending">SUSPICIOUS</span></td>
-                    <td class="date-cell">Bait sent May 21</td>
-                    <td class="notes">Awaiting: real @shuremedia.com email, fee range, product name. Contact from Gmail, NOT domain.</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <div class="section">
-        <h2>🔴 Cancelled / Low Value</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Brand</th>
-                    <th>Type</th>
-                    <th>Reason</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Keymailer / Kabam</td>
-                    <td>Game Keys</td>
-                    <td class="notes">Free key only. No cash. No hardware. Not worth time.</td>
-                </tr>
-                <tr>
-                    <td>Streamers Connected</td>
-                    <td>Co-stream Events</td>
-                    <td class="notes">Exposure only. No direct monetization. Not worth time.</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <div class="section">
-        <h2>📋 Pipeline: Next Batch (Ready to Contact)</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Brand</th>
-                    <th>Type</th>
-                    <th>Why Target</th>
-                    <th>Next Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>ExpressVPN</td>
-                    <td>VPN Software</td>
-                    <td class="notes">Premium VPN, pays well per conversion. Gaming region unlocks.</td>
-                    <td>Wait for NordVPN response first</td>
-                </tr>
-                <tr>
-                    <td>Surfshark</td>
-                    <td>VPN Software</td>
-                    <td class="notes">Aggressive with creator partnerships. Good affiliate rates.</td>
-                    <td>Wait for NordVPN response first</td>
-                </tr>
-                <tr>
-                    <td>Grammarly</td>
-                    <td>Writing Tool</td>
-                    <td class="notes">Massive affiliate program. Pays per conversion. Good for tech channel.</td>
-                    <td>Draft template</td>
-                </tr>
-                <tr>
-                    <td>Canva</td>
-                    <td>Design Tool</td>
-                    <td class="notes">Perfect for creator tutorials. Thumbnails, thumbnails, social media.</td>
-                    <td>Draft template</td>
-                </tr>
-                <tr>
-                    <td>1Password</td>
-                    <td>Password Manager</td>
-                    <td class="notes">Security angle for tech channel. Team plans, family sharing.</td>
-                    <td>Draft template</td>
-                </tr>
-                <tr>
-                    <td>Corsair</td>
-                    <td>PC Hardware/Peripherals</td>
-                    <td class="notes">K70 keyboards, streaming gear. High-value for gaming PC builds.</td>
-                    <td>Draft template on request</td>
-                </tr>
-                <tr>
-                    <td>Malwarebytes</td>
-                    <td>Antivirus Software</td>
-                    <td class="notes">Gaming PC protection angle. Good affiliate payouts.</td>
-                    <td>Draft template on request</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <div class="section" style="text-align: center; margin-top: 40px; padding: 20px; border-radius: 12px; background: #16213e;">
-        <p style="color: #888; font-size: 12px;">
-            ⚠️ Cash/Hardware only. No game keys. No "exposure". No co-streams without pay.<br>
-            Scam baits active: 3 | Auto-scan: Daily 11 AM EST | Last sent batch: May 21, 2026
-        </p>
-    </div>
 
 </body>
 </html>
