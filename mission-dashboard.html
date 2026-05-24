@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mission: 30-Day Sponsors — Predz</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;background:#0a0a0f;color:#e0e0e0;padding:16px;min-height:100vh}
+  .container{max-width:900px;margin:0 auto}
+  header{text-align:center;padding:24px 0;border-bottom:1px solid #333;margin-bottom:20px}
+  h1{font-size:28px;color:#b8336a;margin-bottom:4px}
+  .subtitle{color:#888;font-size:14px}
+  .countdown{background:#1a1a2e;border-radius:12px;padding:16px;text-align:center;margin-bottom:20px;border:1px solid #333}
+  .countdown .days{font-size:48px;font-weight:800;color:#b8336a}
+  .countdown .label{color:#aaa;font-size:12px;text-transform:uppercase;letter-spacing:2px}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px}
+  .card{background:#1a1a2e;border-radius:12px;padding:16px;border:1px solid #333}
+  .card h3{font-size:14px;color:#888;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
+  .card .big{font-size:32px;font-weight:700;color:#fff}
+  .card .note{font-size:12px;color:#666;margin-top:4px}
+  .status-grid{display:grid;grid-template-columns:1fr;gap:10px}
+  .status-item{background:#1a1a2e;border-radius:10px;padding:14px;display:flex;align-items:center;gap:12px;border-left:4px solid #333}
+  .status-item.sent{border-left-color:#00c853}
+  .status-item.waiting{border-left-color:#ffd600}
+  .status-item.cancelled{border-left-color:#ff1744}
+  .status-item.scam{border-left-color:#ff9100}
+  .dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+  .dot.sent{background:#00c853}
+  .dot.waiting{background:#ffd600}
+  .dot.cancelled{background:#ff1744}
+  .dot.scam{background:#ff9100}
+  .brand{font-weight:600;font-size:15px}
+  .channel{font-size:12px;color:#888}
+  .date{font-size:11px;color:#666;margin-left:auto;white-space:nowrap}
+  .timeline{background:#1a1a2e;border-radius:12px;padding:16px;margin-bottom:20px;border:1px solid #333}
+  .timeline h3{font-size:14px;color:#888;text-transform:uppercase;letter-spacing:1px;margin-bottom:12px}
+  .t-event{display:flex;gap:12px;margin-bottom:12px;align-items:flex-start}
+  .t-dot{width:12px;height:12px;border-radius:50%;background:#333;margin-top:4px;flex-shrink:0}
+  .t-dot.done{background:#00c853}
+  .t-dot.upcoming{background:#ffd600}
+  .t-text{font-size:13px;color:#ccc}
+  .t-text strong{color:#fff}
+  .t-date{font-size:11px;color:#666}
+  .next-actions{background:#1a1a2e;border-radius:12px;padding:16px;border:1px solid #333}
+  .next-actions h3{font-size:14px;color:#888;text-transform:uppercase;letter-spacing:1px;margin-bottom:12px}
+  .next-actions ul{list-style:none}
+  .next-actions li{padding:8px 0;border-bottom:1px solid #222;font-size:13px;color:#ccc}
+  .next-actions li:last-child{border-bottom:none}
+  .next-actions .when{color:#b8336a;font-weight:600;font-size:11px;text-transform:uppercase}
+  footer{text-align:center;padding:20px;color:#555;font-size:11px}
+  @media(max-width:500px){
+    .grid{grid-template-columns:1fr}
+    .countdown .days{font-size:36px}
+    h1{font-size:22px}
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>30-DAY SPONSOR MISSION</h1>
+    <div class="subtitle">Predz0rx + PredLabs | June 24, 2026 Deadline</div>
+  </header>
+
+  <div class="countdown">
+    <div class="days" id="daysLeft">30</div>
+    <div class="label">Days Remaining</div>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <h3>Outbounds Sent</h3>
+      <div class="big">6</div>
+      <div class="note">3 per channel</div>
+    </div>
+    <div class="card">
+      <h3>Awaiting Response</h3>
+      <div class="big">6</div>
+      <div class="note">0 replies yet</div>
+    </div>
+    <div class="card">
+      <h3>Predz0rx Targets</h3>
+      <div class="big">3</div>
+      <div class="note">HyperX, SteelSeries, Razer</div>
+    </div>
+    <div class="card">
+      <h3>PredLabs Targets</h3>
+      <div class="big">3</div>
+      <div class="note">Elgato, Govee, Streamlabs</div>
+    </div>
+  </div>
+
+  <div class="status-grid">
+    <div class="status-item sent">
+      <div class="dot sent"></div>
+      <div>
+        <div class="brand">Elgato (CORSAIR)</div>
+        <div class="channel">PredLabs — Stream Deck, Key Lights</div>
+      </div>
+      <div class="date">May 24 ✅</div>
+    </div>
+    <div class="status-item sent">
+      <div class="dot sent"></div>
+      <div>
+        <div class="brand">HyperX</div>
+        <div class="channel">Predz0rx — Headsets, keyboards, mice</div>
+      </div>
+      <div class="date">May 25 ✅</div>
+    </div>
+    <div class="status-item sent">
+      <div class="dot sent"></div>
+      <div>
+        <div class="brand">SteelSeries</div>
+        <div class="channel">Predz0rx — Peripherals</div>
+      </div>
+      <div class="date">May 25 ✅</div>
+    </div>
+    <div class="status-item sent">
+      <div class="dot sent"></div>
+      <div>
+        <div class="brand">Govee</div>
+        <div class="channel">PredLabs — Smart lights (43 devices)</div>
+      </div>
+      <div class="date">May 25 ✅</div>
+    </div>
+    <div class="status-item sent">
+      <div class="dot sent"></div>
+      <div>
+        <div class="brand">Streamlabs</div>
+        <div class="channel">PredLabs — Streaming software</div>
+      </div>
+      <div class="date">May 25 ✅</div>
+    </div>
+    <div class="status-item sent">
+      <div class="dot sent"></div>
+      <div>
+        <div class="brand">Razer</div>
+        <div class="channel">Predz0rx — Peripherals</div>
+      </div>
+      <div class="date">May 25 ✅</div>
+    </div>
+    <div class="status-item scam">
+      <div class="dot scam"></div>
+      <div>
+        <div class="brand">MoClaw / Tinay</div>
+        <div class="channel">PredLabs — Bait reply sent, awaiting verification</div>
+      </div>
+      <div class="date">May 24 ⚠️</div>
+    </div>
+    <div class="status-item cancelled">
+      <div class="dot cancelled"></div>
+      <div>
+        <div class="brand">AMD Red Team</div>
+        <div class="channel">Cancelled — 500K+ required, we bounced 3x</div>
+      </div>
+      <div class="date">May 24 🚫</div>
+    </div>
+  </div>
+
+  <div class="timeline" style="margin-top:20px">
+    <h3>Mission Timeline</h3>
+    <div class="t-event">
+      <div class="t-dot done"></div>
+      <div class="t-text">
+        <strong>DAY 1-7: BLITZ</strong> — Send all outbounds<br/>
+        <span class="t-date">May 24-30</span>
+      </div>
+    </div>
+    <div class="t-event">
+      <div class="t-dot upcoming"></div>
+      <div class="t-text">
+        <strong>DAY 8-14: FOLLOW-UPS</strong> — 2 follow-ups per brand<br/>
+        <span class="t-date">May 31 - June 6</span>
+      </div>
+    </div>
+    <div class="t-event">
+      <div class="t-dot"></div>
+      <div class="t-text">
+        <strong>DAY 15-21: EXPANSIÓN</strong> — Launch Next Batch if no replies<br/>
+        <span class="t-date">June 7-13</span>
+      </div>
+    </div>
+    <div class="t-event">
+      <div class="t-dot"></div>
+      <div class="t-text">
+        <strong>DAY 22-30: CIERRE</strong> — Final follow-ups, negotiate deals<br/>
+        <span class="t-date">June 14-24</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="next-actions">
+    <h3>Next Actions</h3>
+    <ul>
+      <li><span class="when">May 29</span> — Follow-up #1 to Elgato</li>
+      <li><span class="when">May 30</span> — Follow-up #1 to HyperX, SteelSeries, Govee, Streamlabs, Razer</li>
+      <li><span class="when">Jun 5</span> — Follow-up #2 to Elgato</li>
+      <li><span class="when">Jun 6</span> — Follow-up #2 to remaining brands</li>
+      <li><span class="when">Jun 13</span> — Final follow-ups or launch Next Batch (NordVPN, Fifine, Secretlab)</li>
+      <li><span class="when">Jun 24</span> — <strong>MISSION DEADLINE</strong>: 1 sponsor per channel</li>
+    </ul>
+  </div>
+
+  <footer>
+    Auto-updating daily. Cron scans inbox at 11:00 AM EST.<br/>
+    Follow-up blitz every Friday 11:30 AM EST.
+  </footer>
+</div>
+
+<script>
+  const deadline = new Date('2026-06-24T23:59:59-04:00');
+  const now = new Date();
+  const diff = Math.ceil((deadline - now) / (1000 * 60 * 60 * 24));
+  document.getElementById('daysLeft').textContent = diff > 0 ? diff : 0;
+</script>
+</body>
+</html>
