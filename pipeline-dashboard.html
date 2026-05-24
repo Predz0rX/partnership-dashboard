@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pipeline — Predz Partnerships</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;background:#0a0a0f;color:#e0e0e0;padding:16px;min-height:100vh}
+  .container{max-width:900px;margin:0 auto}
+  header{text-align:center;padding:20px 0;border-bottom:1px solid #333;margin-bottom:16px}
+  h1{font-size:26px;color:#b8336a;margin-bottom:4px}
+  .subtitle{color:#888;font-size:13px}
+
+  /* Pipeline Stages */
+  .pipeline{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:20px}
+  .stage{background:#1a1a2e;border-radius:10px;padding:12px;text-align:center;border:1px solid #333}
+  .stage .count{font-size:28px;font-weight:700}
+  .stage .name{font-size:11px;color:#888;text-transform:uppercase;letter-spacing:1px;margin-top:4px}
+  .stage .desc{font-size:10px;color:#666;margin-top:2px}
+  .stage.lead .count{color:#00c853}
+  .stage.sent .count{color:#00c853}
+  .stage.reply .count{color:#ffd600}
+  .stage.neg .count{color:#2196f3}
+  .stage.closed .count{color:#b8336a}
+
+  /* How It Works */
+  .how{background:#1a1a2e;border-radius:12px;padding:16px;margin-bottom:20px;border:1px solid #333}
+  .how h3{font-size:14px;color:#888;text-transform:uppercase;letter-spacing:1px;margin-bottom:12px}
+  .flow{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+  .flow-step{background:#222;border-radius:8px;padding:10px 14px;font-size:12px;text-align:center;flex:1;min-width:100px}
+  .flow-step strong{display:block;color:#fff;font-size:13px;margin-bottom:2px}
+  .flow-step span{color:#888;font-size:10px}
+  .flow-arrow{color:#666;font-size:16px}
+
+  /* Active Deals */
+  .deals{background:#1a1a2e;border-radius:12px;padding:16px;margin-bottom:20px;border:1px solid #333}
+  .deals h3{font-size:14px;color:#888;text-transform:uppercase;letter-spacing:1px;margin-bottom:12px}
+  .deal{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid #222}
+  .deal:last-child{border-bottom:none}
+  .deal .col1{flex:1}
+  .deal .brand{font-weight:600;font-size:15px}
+  .deal .info{font-size:11px;color:#888}
+  .deal .col2{text-align:center;min-width:80px}
+  .deal .status{font-size:11px;font-weight:600;padding:4px 10px;border-radius:20px;display:inline-block}
+  .status-green{background:#00c85320;color:#00c853}
+  .status-yellow{background:#ffd60020;color:#ffd600}
+  .status-blue{background:#2196f320;color:#2196f3}
+  .status-pink{background:#b8336a20;color:#b8336a}
+  .deal .col3{text-align:right;min-width:60px;font-size:11px;color:#666}
+
+  /* New Inbound */
+  .inbound{background:#1a1a2e;border-radius:12px;padding:16px;margin-bottom:20px;border:1px solid #333}
+  .inbound h3{font-size:14px;color:#888;text-transform:uppercase;letter-spacing:1px;margin-bottom:12px}
+  .inbound-item{display:flex;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid #222}
+  .inbound-item:last-child{border-bottom:none}
+  .inbound-item .sender{font-weight:600;font-size:14px}
+  .inbound-item .subject{font-size:12px;color:#aaa}
+  .inbound-item .time{font-size:10px;color:#666;margin-left:auto;white-space:nowrap}
+  .tag{font-size:9px;padding:2px 6px;border-radius:4px;margin-left:6px}
+  .tag-scam{background:#ff174420;color:#ff1744}
+  .tag-low{background:#66666620;color:#999}
+  .tag-high{background:#00c85320;color:#00c853}
+  .tag-sus{background:#ff910020;color:#ff9100}
+
+  /* Next Batch */
+  .next{background:#1a1a2e;border-radius:12px;padding:16px;margin-bottom:20px;border:1px solid #333}
+  .next h3{font-size:14px;color:#888;text-transform:uppercase;letter-spacing:1px;margin-bottom:12px}
+  .next-item{display:flex;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid #222}
+  .next-item:last-child{border-bottom:none}
+  .next-item .brand{font-weight:600;font-size:14px}
+  .next-item .why{font-size:11px;color:#888;flex:1}
+  .next-item .trigger{font-size:10px;color:#b8336a;margin-left:auto;white-space:nowrap}
+
+  /* Auto Actions */
+  .auto{background:#1a1a2e;border-radius:12px;padding:16px;border:1px solid #333}
+  .auto h3{font-size:14px;color:#888;text-transform:uppercase;letter-spacing:1px;margin-bottom:12px}
+  .auto-item{padding:8px 0;border-bottom:1px solid #222;font-size:13px}
+  .auto-item:last-child{border-bottom:none}
+  .auto-item .time{color:#b8336a;font-weight:600;font-size:11px}
+
+  footer{text-align:center;padding:16px;color:#555;font-size:10px}
+
+  @media(max-width:500px){
+    .pipeline{grid-template-columns:repeat(3,1fr)}
+    h1{font-size:20px}
+    .flow{flex-direction:column;align-items:stretch}
+    .flow-arrow{text-align:center;transform:rotate(90deg)}
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>PARTNERSHIP PIPELINE</h1>
+    <div class="subtitle">How new deals flow in and move through stages</div>
+  </header>
+
+  <!-- PIPELINE STAGES -->
+  <div class="pipeline">
+    <div class="stage lead">
+      <div class="count">0</div>
+      <div class="name">New Lead</div>
+      <div class="desc">Inbox scan detects keyword</div>
+    </div>
+    <div class="stage sent">
+      <div class="count">6</div>
+      <div class="name">Outbound Sent</div>
+      <div class="desc">Email delivered</div>
+    </div>
+    <div class="stage reply">
+      <div class="count">0</div>
+      <div class="name">Replied</div>
+      <div class="desc">Brand responded</div>
+    </div>
+    <div class="stage neg">
+      <div class="count">0</div>
+      <div class="name">Negotiating</div>
+      <div class="desc">Terms discussed</div>
+    </div>
+    <div class="stage closed">
+      <div class="count">0</div>
+      <div class="name">Closed</div>
+      <div class="desc">Deal signed or dead</div>
+    </div>
+  </div>
+
+  <!-- HOW NEW DEALS FLOW IN -->
+  <div class="how">
+    <h3>How New Deals Enter the Pipeline</h3>
+    <div class="flow">
+      <div class="flow-step">
+        <strong>Inbox Scan</strong>
+        <span>Daily 11:00 AM</span>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">
+        <strong>Classify</strong>
+        <span>SCAM / LOW / SUSPICIOUS / HIGH</span>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">
+        <strong>Value Filter</strong>
+        <span>Cash >$50? Hardware?</span>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">
+        <strong>Add to Pipeline</strong>
+        <span>Auto-update dashboard</span>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">
+        <strong>Action</strong>
+        <span>Bait / Draft / Send / Ignore</span>
+      </div>
+    </div>
+    <div style="font-size:11px;color:#888;line-height:1.6">
+      <strong style="color:#fff">Detection keywords:</strong> partner, collab, sponsor, brand, ambassador, hardware, review, creator, affiliate, paid, offer, game code, integration fee, product, sample<br/>
+      <strong style="color:#fff">Auto-reject:</strong> Keymailer keys-only, exposure-only events, backlink sellers, vague "partnerships" without specifics
+    </div>
+  </div>
+
+  <!-- ACTIVE DEALS -->
+  <div class="deals">
+    <h3>Active Deals — Outbound</h3>
+    <div class="deal">
+      <div class="col1">
+        <div class="brand">Elgato (CORSAIR)</div>
+        <div class="info">PredLabs — Stream Deck, Key Lights, Capture</div>
+      </div>
+      <div class="col2"><span class="status status-green">SENT</span></div>
+      <div class="col3">May 24</div>
+    </div>
+    <div class="deal">
+      <div class="col1">
+        <div class="brand">HyperX</div>
+        <div class="info">Predz0rx — Headsets, Keyboards, Mice</div>
+      </div>
+      <div class="col2"><span class="status status-green">SENT</span></div>
+      <div class="col3">May 25</div>
+    </div>
+    <div class="deal">
+      <div class="col1">
+        <div class="brand">SteelSeries</div>
+        <div class="info">Predz0rx — Arctis, Apex, Rival</div>
+      </div>
+      <div class="col2"><span class="status status-green">SENT</span></div>
+      <div class="col3">May 25</div>
+    </div>
+    <div class="deal">
+      <div class="col1">
+        <div class="brand">Govee</div>
+        <div class="info">PredLabs — Smart Lights (43 devices already)</div>
+      </div>
+      <div class="col2"><span class="status status-green">SENT</span></div>
+      <div class="col3">May 25</div>
+    </div>
+    <div class="deal">
+      <div class="col1">
+        <div class="brand">Streamlabs</div>
+        <div class="info">PredLabs — Streaming Software / Ultra</div>
+      </div>
+      <div class="col2"><span class="status status-green">SENT</span></div>
+      <div class="col3">May 25</div>
+    </div>
+    <div class="deal">
+      <div class="col1">
+        <div class="brand">Razer</div>
+        <div class="info">Predz0rx — BlackShark, Huntsman, DeathAdder</div>
+      </div>
+      <div class="col2"><span class="status status-green">SENT</span></div>
+      <div class="col3">May 25</div>
+    </div>
+  </div>
+
+  <!-- INBOUND QUEUE -->
+  <div class="inbound">
+    <h3>Inbound Queue — Needs Action</h3>
+    <div class="inbound-item">
+      <div>
+        <div class="sender">MoClaw / Tinay <span class="tag tag-sus">SUSPICIOUS</span></div>
+        <div class="subject">"Paid Collab" — bait reply sent, awaiting rates & contract</div>
+      </div>
+      <div class="time">May 24</div>
+    </div>
+    <div class="inbound-item" style="opacity:0.5">
+      <div>
+        <div class="sender">AMD Red Team <span class="tag tag-scam">CANCELLED</span></div>
+        <div class="subject">Bounced 3x — wrong tier, 500K+ required</div>
+      </div>
+      <div class="time">May 21</div>
+    </div>
+    <div style="text-align:center;padding:12px;color:#666;font-size:12px">
+      — Inbox scan runs daily at 11:00 AM —
+    </div>
+  </div>
+
+  <!-- NEXT BATCH (AUTO-TRIGGER) -->
+  <div class="next">
+    <h3>Next Batch — Queued (Auto-trigger if no replies by Jun 13)</h3>
+    <div class="next-item">
+      <div class="brand">NordVPN</div>
+      <div class="why">VPN software, gaming privacy angle, pays per conversion</div>
+      <div class="trigger">Jun 13 if no replies</div>
+    </div>
+    <div class="next-item">
+      <div class="brand">Fifine</div>
+      <div class="why">Budget mics, sends samples easy, no huge sub requirements</div>
+      <div class="trigger">Jun 13 if no replies</div>
+    </div>
+    <div class="next-item">
+      <div class="brand">Maono</div>
+      <div class="why">Budget mics, active creator program</div>
+      <div class="trigger">Jun 13 if no replies</div>
+    </div>
+    <div class="next-item">
+      <div class="brand">Secretlab</div>
+      <div class="why">Gaming chairs, selective but possible after first sponsor</div>
+      <div class="trigger">Jun 13 if no replies</div>
+    </div>
+    <div class="next-item">
+      <div class="brand">ASUS ROG</div>
+      <div class="why">Creator Alliance, peripherals + builds</div>
+      <div class="trigger">Jun 13 if no replies</div>
+    </div>
+  </div>
+
+  <!-- AUTO ACTIONS -->
+  <div class="auto">
+    <h3>Automated Actions Running</h3>
+    <div class="auto-item">
+      <span class="time">Daily 11:00 AM</span> — Inbox scan for partnership keywords (new leads enter pipeline automatically)
+    </div>
+    <div class="auto-item">
+      <span class="time">Fridays 11:30 AM</span> — Follow-up blitz: check who replied, send follow-ups to who didn't
+    </div>
+    <div class="auto-item">
+      <span class="time">Realtime</span> — Pipeline auto-synced to GitHub after every change
+    </div>
+  </div>
+
+  <footer>
+    Pipeline auto-updates. New leads appear in "Inbound Queue" within 24h of arrival.<br/>
+    Manual intervention only for: draft approval, scam verification, deal negotiation.
+  </footer>
+</div>
+</body>
+</html>
