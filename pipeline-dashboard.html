@@ -12,80 +12,77 @@
   h1{font-size:26px;color:#b8336a;margin-bottom:4px}
   .subtitle{color:#888;font-size:13px}
 
+  /* Summary Cards */
+  .summary{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px}
+  .sum-card{background:#1a1a2e;border-radius:10px;padding:14px;text-align:center;border:1px solid #333}
+  .sum-card .num{font-size:32px;font-weight:700}
+  .sum-card .lbl{font-size:11px;color:#888;text-transform:uppercase;letter-spacing:1px;margin-top:4px}
+  .sum-card.sent .num{color:#00c853}
+  .sum-card.queue .num{color:#ffd600}
+  .sum-card.reply .num{color:#2196f3}
+  .sum-card.bounce .num{color:#ff1744}
+
   /* Pipeline Stages */
   .pipeline{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:20px}
   .stage{background:#1a1a2e;border-radius:10px;padding:12px;text-align:center;border:1px solid #333}
   .stage .count{font-size:28px;font-weight:700}
   .stage .name{font-size:11px;color:#888;text-transform:uppercase;letter-spacing:1px;margin-top:4px}
   .stage .desc{font-size:10px;color:#666;margin-top:2px}
-  .stage.lead .count{color:#00c853}
+  .stage.lead .count{color:#555}
   .stage.sent .count{color:#00c853}
-  .stage.reply .count{color:#ffd600}
-  .stage.neg .count{color:#2196f3}
+  .stage.reply .count{color:#2196f3}
+  .stage.neg .count{color:#ffd600}
   .stage.closed .count{color:#b8336a}
 
-  /* How It Works */
-  .how{background:#1a1a2e;border-radius:12px;padding:16px;margin-bottom:20px;border:1px solid #333}
-  .how h3{font-size:14px;color:#888;text-transform:uppercase;letter-spacing:1px;margin-bottom:12px}
-  .flow{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:12px}
-  .flow-step{background:#222;border-radius:8px;padding:10px 14px;font-size:12px;text-align:center;flex:1;min-width:100px}
-  .flow-step strong{display:block;color:#fff;font-size:13px;margin-bottom:2px}
-  .flow-step span{color:#888;font-size:10px}
-  .flow-arrow{color:#666;font-size:16px}
+  /* Collapsible Sections */
+  .section{background:#1a1a2e;border-radius:12px;margin-bottom:16px;border:1px solid #333;overflow:hidden}
+  .section-header{padding:14px 16px;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+  .section-header h3{font-size:14px;color:#888;text-transform:uppercase;letter-spacing:1px}
+  .section-header .badge{background:#b8336a;font-size:11px;color:#fff;padding:2px 8px;border-radius:10px}
+  .section-content{padding:0 16px 16px;display:block}
+  .section.collapsed .section-content{display:none}
+  .section.collapsed .toggle{transform:rotate(0deg)}
+  .toggle{transition:transform .2s;transform:rotate(180deg);color:#888;font-size:12px}
 
-  /* Active Deals */
-  .deals{background:#1a1a2e;border-radius:12px;padding:16px;margin-bottom:20px;border:1px solid #333}
-  .deals h3{font-size:14px;color:#888;text-transform:uppercase;letter-spacing:1px;margin-bottom:12px}
+  /* Deal Items */
   .deal{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid #222}
   .deal:last-child{border-bottom:none}
   .deal .col1{flex:1}
-  .deal .brand{font-weight:600;font-size:15px}
+  .deal .brand{font-weight:600;font-size:14px}
   .deal .info{font-size:11px;color:#888}
   .deal .col2{text-align:center;min-width:80px}
-  .deal .status{font-size:11px;font-weight:600;padding:4px 10px;border-radius:20px;display:inline-block}
+  .deal .status{font-size:10px;font-weight:600;padding:3px 8px;border-radius:20px;display:inline-block}
   .status-green{background:#00c85320;color:#00c853}
   .status-yellow{background:#ffd60020;color:#ffd600}
   .status-blue{background:#2196f320;color:#2196f3}
   .status-pink{background:#b8336a20;color:#b8336a}
-  .deal .col3{text-align:right;min-width:60px;font-size:11px;color:#666}
+  .status-grey{background:#444;color:#aaa}
+  .deal .col3{text-align:right;min-width:55px;font-size:11px;color:#666}
 
-  /* New Inbound */
-  .inbound{background:#1a1a2e;border-radius:12px;padding:16px;margin-bottom:20px;border:1px solid #333}
-  .inbound h3{font-size:14px;color:#888;text-transform:uppercase;letter-spacing:1px;margin-bottom:12px}
+  /* Queue Items */
+  .queue-item{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid #222}
+  .queue-item:last-child{border-bottom:none}
+  .queue-item .num{color:#888;font-size:12px;min-width:24px;text-align:right}
+  .queue-item .brand{font-weight:600;font-size:14px;flex:1}
+  .queue-item .channel{font-size:10px;color:#888;padding:2px 6px;border-radius:4px;background:#222}
+  .queue-item .channel.p0{color:#b8336a}
+  .queue-item .channel.p1{color:#00c853}
+
+  /* Inbound Items */
   .inbound-item{display:flex;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid #222}
   .inbound-item:last-child{border-bottom:none}
   .inbound-item .sender{font-weight:600;font-size:14px}
   .inbound-item .subject{font-size:12px;color:#aaa}
-  .inbound-item .time{font-size:10px;color:#666;margin-left:auto;white-space:nowrap}
-  .tag{font-size:9px;padding:2px 6px;border-radius:4px;margin-left:6px}
+  .inbound-item .tag{font-size:9px;padding:2px 6px;border-radius:4px;margin-left:6px}
   .tag-scam{background:#ff174420;color:#ff1744}
-  .tag-low{background:#66666620;color:#999}
-  .tag-high{background:#00c85320;color:#00c853}
   .tag-sus{background:#ff910020;color:#ff9100}
-
-  /* Next Batch */
-  .next{background:#1a1a2e;border-radius:12px;padding:16px;margin-bottom:20px;border:1px solid #333}
-  .next h3{font-size:14px;color:#888;text-transform:uppercase;letter-spacing:1px;margin-bottom:12px}
-  .next-item{display:flex;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid #222}
-  .next-item:last-child{border-bottom:none}
-  .next-item .brand{font-weight:600;font-size:14px}
-  .next-item .why{font-size:11px;color:#888;flex:1}
-  .next-item .trigger{font-size:10px;color:#b8336a;margin-left:auto;white-space:nowrap}
-
-  /* Auto Actions */
-  .auto{background:#1a1a2e;border-radius:12px;padding:16px;border:1px solid #333}
-  .auto h3{font-size:14px;color:#888;text-transform:uppercase;letter-spacing:1px;margin-bottom:12px}
-  .auto-item{padding:8px 0;border-bottom:1px solid #222;font-size:13px}
-  .auto-item:last-child{border-bottom:none}
-  .auto-item .time{color:#b8336a;font-weight:600;font-size:11px}
 
   footer{text-align:center;padding:16px;color:#555;font-size:10px}
 
   @media(max-width:500px){
+    .summary{grid-template-columns:repeat(2,1fr)}
     .pipeline{grid-template-columns:repeat(3,1fr)}
     h1{font-size:20px}
-    .flow{flex-direction:column;align-items:stretch}
-    .flow-arrow{text-align:center;transform:rotate(90deg)}
   }
 </style>
 </head>
@@ -93,196 +90,259 @@
 <div class="container">
   <header>
     <h1>PARTNERSHIP PIPELINE</h1>
-    <div class="subtitle">How new deals flow in and move through stages</div>
+    <div class="subtitle">Monster Outreach: 48 Brands | 21 Sent | 27 in Queue</div>
   </header>
+
+  <!-- SUMMARY -->
+  <div class="summary">
+    <div class="sum-card sent">
+      <div class="num">21</div>
+      <div class="lbl">Sent Today</div>
+    </div>
+    <div class="sum-card queue">
+      <div class="num">27</div>
+      <div class="lbl">In Queue</div>
+    </div>
+    <div class="sum-card reply">
+      <div class="num">0</div>
+      <div class="lbl">Replied</div>
+    </div>
+    <div class="sum-card bounce">
+      <div class="num">4</div>
+      <div class="lbl">Bounced</div>
+    </div>
+  </div>
 
   <!-- PIPELINE STAGES -->
   <div class="pipeline">
     <div class="stage lead">
       <div class="count">0</div>
       <div class="name">New Lead</div>
-      <div class="desc">Inbox scan detects keyword</div>
+      <div class="desc">Inbox scan</div>
     </div>
     <div class="stage sent">
-      <div class="count">6</div>
-      <div class="name">Outbound Sent</div>
-      <div class="desc">Email delivered</div>
+      <div class="count">21</div>
+      <div class="name">Sent</div>
+      <div class="desc">Awaiting reply</div>
     </div>
     <div class="stage reply">
       <div class="count">0</div>
       <div class="name">Replied</div>
-      <div class="desc">Brand responded</div>
+      <div class="desc">In discussion</div>
     </div>
     <div class="stage neg">
       <div class="count">0</div>
       <div class="name">Negotiating</div>
-      <div class="desc">Terms discussed</div>
+      <div class="desc">Terms/Trial</div>
     </div>
     <div class="stage closed">
       <div class="count">0</div>
       <div class="name">Closed</div>
-      <div class="desc">Deal signed or dead</div>
+      <div class="desc">Signed or Dead</div>
     </div>
   </div>
 
-  <!-- HOW NEW DEALS FLOW IN -->
-  <div class="how">
-    <h3>How New Deals Enter the Pipeline</h3>
-    <div class="flow">
-      <div class="flow-step">
-        <strong>Inbox Scan</strong>
-        <span>Daily 11:00 AM</span>
-      </div>
-      <div class="flow-arrow">→</div>
-      <div class="flow-step">
-        <strong>Classify</strong>
-        <span>SCAM / LOW / SUSPICIOUS / HIGH</span>
-      </div>
-      <div class="flow-arrow">→</div>
-      <div class="flow-step">
-        <strong>Value Filter</strong>
-        <span>Cash >$50? Hardware?</span>
-      </div>
-      <div class="flow-arrow">→</div>
-      <div class="flow-step">
-        <strong>Add to Pipeline</strong>
-        <span>Auto-update dashboard</span>
-      </div>
-      <div class="flow-arrow">→</div>
-      <div class="flow-step">
-        <strong>Action</strong>
-        <span>Bait / Draft / Send / Ignore</span>
-      </div>
+  <!-- SENT -->
+  <div class="section" id="sent-section">
+    <div class="section-header" onclick="toggle('sent-section')">
+      <h3>✅ Sent Today (21)</h3>
+      <span class="toggle">▲</span>
     </div>
-    <div style="font-size:11px;color:#888;line-height:1.6">
-      <strong style="color:#fff">Detection keywords:</strong> partner, collab, sponsor, brand, ambassador, hardware, review, creator, affiliate, paid, offer, game code, integration fee, product, sample<br/>
-      <strong style="color:#fff">Auto-reject:</strong> Keymailer keys-only, exposure-only events, backlink sellers, vague "partnerships" without specifics
+    <div class="section-content">
+      <div class="deal">
+        <div class="col1"><div class="brand">Elgato (CORSAIR)</div><div class="info">PredLabs — mediarelations@elgato.com</div></div>
+        <div class="col2"><span class="status status-green">SENT</span></div>
+        <div class="col3">May 24</div>
+      </div>
+      <div class="deal">
+        <div class="col1"><div class="brand">HyperX</div><div class="info">Predz0rx — press@hyperx.com</div></div>
+        <div class="col2"><span class="status status-green">SENT</span></div>
+        <div class="col3">May 25</div>
+      </div>
+      <div class="deal">
+        <div class="col1"><div class="brand">SteelSeries</div><div class="info">Predz0rx — press@steelseries.com</div></div>
+        <div class="col2"><span class="status status-green">SENT</span></div>
+        <div class="col3">May 25</div>
+      </div>
+      <div class="deal">
+        <div class="col1"><div class="brand">Govee</div><div class="info">PredLabs — partnerships@govee.com ❌ BOUNCED</div></div>
+        <div class="col2"><span class="status status-pink">BOUNCED</span></div>
+        <div class="col3">May 25</div>
+      </div>
+      <div class="deal">
+        <div class="col1"><div class="brand">Streamlabs</div><div class="info">PredLabs — bd@streamlabs.com (retry)</div></div>
+        <div class="col2"><span class="status status-green">SENT</span></div>
+        <div class="col3">May 25</div>
+      </div>
+      <div class="deal">
+        <div class="col1"><div class="brand">Razer</div><div class="info">Predz0rx — streamer@razer.com ❌ BOUNCED</div></div>
+        <div class="col2"><span class="status status-pink">BOUNCED</span></div>
+        <div class="col3">May 25</div>
+      </div>
+      <div class="deal">
+        <div class="col1"><div class="brand">Corsair</div><div class="info">Predz0rx — press@corsair.com</div></div>
+        <div class="col2"><span class="status status-green">SENT</span></div>
+        <div class="col3">May 25</div>
+      </div>
+      <div class="deal">
+        <div class="col1"><div class="brand">Logitech G</div><div class="info">Predz0rx — pr@logitech.com</div></div>
+        <div class="col2"><span class="status status-green">SENT</span></div>
+        <div class="col3">May 25</div>
+      </div>
+      <div class="deal">
+        <div class="col1"><div class="brand">ASUS ROG</div><div class="info">Predz0rx — rog@asus.com</div></div>
+        <div class="col2"><span class="status status-green">SENT</span></div>
+        <div class="col3">May 25</div>
+      </div>
+      <div class="deal">
+        <div class="col1"><div class="brand">Noblechairs</div><div class="info">Predz0rx — info@noblechairs.com</div></div>
+        <div class="col2"><span class="status status-green">SENT</span></div>
+        <div class="col3">May 25</div>
+      </div>
+      <div class="deal">
+        <div class="col1"><div class="brand">Roccat</div><div class="info">Predz0rx — info@roccat.com</div></div>
+        <div class="col2"><span class="status status-green">SENT</span></div>
+        <div class="col3">May 25</div>
+      </div>
+      <div class="deal">
+        <div class="col1"><div class="brand">Turtle Beach</div><div class="info">Predz0rx — pr@turtlebeach.com</div></div>
+        <div class="col2"><span class="status status-green">SENT</span></div>
+        <div class="col3">May 25</div>
+      </div>
+      <div class="deal">
+        <div class="col1"><div class="brand">BenQ/Zowie</div><div class="info">Predz0rx — pr@benq.com</div></div>
+        <div class="col2"><span class="status status-green">SENT</span></div>
+        <div class="col3">May 25</div>
+      </div>
+      <div class="deal">
+        <div class="col1"><div class="brand">Fnatic Gear</div><div class="info">Predz0rx — partnerships@fnatic.com</div></div>
+        <div class="col2"><span class="status status-green">SENT</span></div>
+        <div class="col3">May 25</div>
+      </div>
+      <div class="deal">
+        <div class="col1"><div class="brand">Nanoleaf</div><div class="info">PredLabs — press@nanoleaf.me</div></div>
+        <div class="col2"><span class="status status-green">SENT</span></div>
+        <div class="col3">May 25</div>
+      </div>
+      <div class="deal">
+        <div class="col1"><div class="brand">Restream.io</div><div class="info">PredLabs — partners@restream.io</div></div>
+        <div class="col2"><span class="status status-green">SENT</span></div>
+        <div class="col3">May 25</div>
+      </div>
+      <div class="deal">
+        <div class="col1"><div class="brand">Own3D.tv</div><div class="info">PredLabs — info@own3d.tv</div></div>
+        <div class="col2"><span class="status status-green">SENT</span></div>
+        <div class="col3">May 25</div>
+      </div>
+      <div class="deal">
+        <div class="col1"><div class="brand">Epidemic Sound</div><div class="info">PredLabs — affiliates@epidemicsound.com</div></div>
+        <div class="col2"><span class="status status-green">SENT</span></div>
+        <div class="col3">May 25</div>
+      </div>
+      <div class="deal">
+        <div class="col1"><div class="brand">Riverside.fm</div><div class="info">PredLabs — partners@riverside.fm</div></div>
+        <div class="col2"><span class="status status-green">SENT</span></div>
+        <div class="col3">May 25</div>
+      </div>
+      <div class="deal">
+        <div class="col1"><div class="brand">MoClaw / Tinay</div><div class="info">PredLabs — Bait reply sent, awaiting verification</div></div>
+        <div class="col2"><span class="status status-yellow">BAIT</span></div>
+        <div class="col3">May 24</div>
+      </div>
+      <div class="deal">
+        <div class="col1"><div class="brand">AMD Red Team</div><div class="info">Both — redteam@amd.com ❌ BOUNCED 3x</div></div>
+        <div class="col2"><span class="status status-pink">CANCELLED</span></div>
+        <div class="col3">May 24</div>
+      </div>
     </div>
   </div>
 
-  <!-- ACTIVE DEALS -->
-  <div class="deals">
-    <h3>Active Deals — Outbound</h3>
-    <div class="deal">
-      <div class="col1">
-        <div class="brand">Elgato (CORSAIR)</div>
-        <div class="info">PredLabs — Stream Deck, Key Lights, Capture</div>
-      </div>
-      <div class="col2"><span class="status status-green">SENT</span></div>
-      <div class="col3">May 24</div>
+  <!-- QUEUE: PREDZ0RX -->
+  <div class="section collapsed" id="queue-p0">
+    <div class="section-header" onclick="toggle('queue-p0')">
+      <h3>⏳ Queue: Predz0rx (10 remaining)</h3>
+      <span class="toggle">▲</span>
     </div>
-    <div class="deal">
-      <div class="col1">
-        <div class="brand">HyperX</div>
-        <div class="info">Predz0rx — Headsets, Keyboards, Mice</div>
-      </div>
-      <div class="col2"><span class="status status-green">SENT</span></div>
-      <div class="col3">May 25</div>
+    <div class="section-content">
+      <div class="queue-item"><span class="num">11</span><span class="brand">Scuf Gaming</span><span class="channel p0">Controllers</span></div>
+      <div class="queue-item"><span class="num">12</span><span class="brand">Cooler Master</span><span class="channel p0">Peripherals</span></div>
+      <div class="queue-item"><span class="num">13</span><span class="brand">MSI</span><span class="channel p0">Hardware</span></div>
+      <div class="queue-item"><span class="num">14</span><span class="brand">AOC/AGON</span><span class="channel p0">Monitors</span></div>
+      <div class="queue-item"><span class="num">15</span><span class="brand">DXRacer</span><span class="channel p0">Chairs</span></div>
+      <div class="queue-item"><span class="num">16</span><span class="brand">KontrolFreek</span><span class="channel p0">Controller accessories</span></div>
+      <div class="queue-item"><span class="num">17</span><span class="brand">Alienware/Dell</span><span class="channel p0">PCs/Monitors</span></div>
+      <div class="queue-item"><span class="num">18</span><span class="brand">GFuel</span><span class="channel p0">Energy drink</span></div>
+      <div class="queue-item"><span class="num">19</span><span class="brand">Sneak Energy</span><span class="channel p0">Energy drink</span></div>
+      <div class="queue-item"><span class="num">20</span><span class="brand">Advance.gg</span><span class="channel p0">Creator monetization</span></div>
     </div>
-    <div class="deal">
-      <div class="col1">
-        <div class="brand">SteelSeries</div>
-        <div class="info">Predz0rx — Arctis, Apex, Rival</div>
-      </div>
-      <div class="col2"><span class="status status-green">SENT</span></div>
-      <div class="col3">May 25</div>
+  </div>
+
+  <!-- QUEUE: PREDLABS -->
+  <div class="section collapsed" id="queue-p1">
+    <div class="section-header" onclick="toggle('queue-p1')">
+      <h3>⏳ Queue: PredLabs (12 remaining)</h3>
+      <span class="toggle">▲</span>
     </div>
-    <div class="deal">
-      <div class="col1">
-        <div class="brand">Govee</div>
-        <div class="info">PredLabs — Smart Lights (43 devices already)</div>
-      </div>
-      <div class="col2"><span class="status status-green">SENT</span></div>
-      <div class="col3">May 25</div>
-    </div>
-    <div class="deal">
-      <div class="col1">
-        <div class="brand">Streamlabs</div>
-        <div class="info">PredLabs — Streaming Software / Ultra</div>
-      </div>
-      <div class="col2"><span class="status status-green">SENT</span></div>
-      <div class="col3">May 25</div>
-    </div>
-    <div class="deal">
-      <div class="col1">
-        <div class="brand">Razer</div>
-        <div class="info">Predz0rx — BlackShark, Huntsman, DeathAdder</div>
-      </div>
-      <div class="col2"><span class="status status-green">SENT</span></div>
-      <div class="col3">May 25</div>
+    <div class="section-content">
+      <div class="queue-item"><span class="num">9</span><span class="brand">Philips Hue (Signify)</span><span class="channel p1">Smart lights</span></div>
+      <div class="queue-item"><span class="num">10</span><span class="brand">LIFX</span><span class="channel p1">Smart lights</span></div>
+      <div class="queue-item"><span class="num">11</span><span class="brand">Artlist</span><span class="channel p1">Stock footage</span></div>
+      <div class="queue-item"><span class="num">12</span><span class="brand">TubeBuddy</span><span class="channel p1">YouTube tools</span></div>
+      <div class="queue-item"><span class="num">13</span><span class="brand">vidIQ</span><span class="channel p1">YouTube analytics</span></div>
+      <div class="queue-item"><span class="num">14</span><span class="brand">Soundstripe</span><span class="channel p1">Music licensing</span></div>
+      <div class="queue-item"><span class="num">15</span><span class="brand">NordVPN</span><span class="channel p1">VPN</span></div>
+      <div class="queue-item"><span class="num">16</span><span class="brand">Surfshark</span><span class="channel p1">VPN</span></div>
+      <div class="queue-item"><span class="num">17</span><span class="brand">Opera GX</span><span class="channel p1">Gaming browser</span></div>
+      <div class="queue-item"><span class="num">18</span><span class="brand">Canva</span><span class="channel p1">Design tools</span></div>
+      <div class="queue-item"><span class="num">19</span><span class="brand">Descript</span><span class="channel p1">Video editing AI</span></div>
+      <div class="queue-item"><span class="num">20</span><span class="brand">MotionVFX</span><span class="channel p1">AE templates</span></div>
     </div>
   </div>
 
   <!-- INBOUND QUEUE -->
-  <div class="inbound">
-    <h3>Inbound Queue — Needs Action</h3>
-    <div class="inbound-item">
-      <div>
-        <div class="sender">MoClaw / Tinay <span class="tag tag-sus">SUSPICIOUS</span></div>
-        <div class="subject">"Paid Collab" — bait reply sent, awaiting rates & contract</div>
-      </div>
-      <div class="time">May 24</div>
+  <div class="section collapsed" id="inbound">
+    <div class="section-header" onclick="toggle('inbound')">
+      <h3>📥 Inbound (1 awaiting action)</h3>
+      <span class="toggle">▲</span>
     </div>
-    <div class="inbound-item" style="opacity:0.5">
-      <div>
-        <div class="sender">AMD Red Team <span class="tag tag-scam">CANCELLED</span></div>
-        <div class="subject">Bounced 3x — wrong tier, 500K+ required</div>
+    <div class="section-content">
+      <div class="inbound-item">
+        <div>
+          <div class="sender">MoClaw / Tinay <span class="tag-sus">SUSPICIOUS</span></div>
+          <div class="subject">Bait reply sent — awaiting rates & contract verification</div>
+        </div>
       </div>
-      <div class="time">May 21</div>
-    </div>
-    <div style="text-align:center;padding:12px;color:#666;font-size:12px">
-      — Inbox scan runs daily at 11:00 AM —
     </div>
   </div>
 
-  <!-- NEXT BATCH (AUTO-TRIGGER) -->
-  <div class="next">
-    <h3>Next Batch — Queued (Auto-trigger if no replies by Jun 13)</h3>
-    <div class="next-item">
-      <div class="brand">NordVPN</div>
-      <div class="why">VPN software, gaming privacy angle, pays per conversion</div>
-      <div class="trigger">Jun 13 if no replies</div>
+  <!-- WEB FORMS NEEDED -->
+  <div class="section collapsed" id="webforms">
+    <div class="section-header" onclick="toggle('webforms')">
+      <h3>🌐 Web Forms Required (2)</h3>
+      <span class="toggle">▲</span>
     </div>
-    <div class="next-item">
-      <div class="brand">Fifine</div>
-      <div class="why">Budget mics, sends samples easy, no huge sub requirements</div>
-      <div class="trigger">Jun 13 if no replies</div>
-    </div>
-    <div class="next-item">
-      <div class="brand">Maono</div>
-      <div class="why">Budget mics, active creator program</div>
-      <div class="trigger">Jun 13 if no replies</div>
-    </div>
-    <div class="next-item">
-      <div class="brand">Secretlab</div>
-      <div class="why">Gaming chairs, selective but possible after first sponsor</div>
-      <div class="trigger">Jun 13 if no replies</div>
-    </div>
-    <div class="next-item">
-      <div class="brand">ASUS ROG</div>
-      <div class="why">Creator Alliance, peripherals + builds</div>
-      <div class="trigger">Jun 13 if no replies</div>
-    </div>
-  </div>
-
-  <!-- AUTO ACTIONS -->
-  <div class="auto">
-    <h3>Automated Actions Running</h3>
-    <div class="auto-item">
-      <span class="time">Daily 11:00 AM</span> — Inbox scan for partnership keywords (new leads enter pipeline automatically)
-    </div>
-    <div class="auto-item">
-      <span class="time">Fridays 11:30 AM</span> — Follow-up blitz: check who replied, send follow-ups to who didn't
-    </div>
-    <div class="auto-item">
-      <span class="time">Realtime</span> — Pipeline auto-synced to GitHub after every change
+    <div class="section-content">
+      <div class="queue-item">
+        <span class="brand">Razer Creator Program</span>
+        <span class="channel p0"><a href="https://www.razer.com/creator-program" style="color:#b8336a">razer.com/creator-program</a></span>
+      </div>
+      <div class="queue-item">
+        <span class="brand">Govee Affiliate</span>
+        <span class="channel p1"><a href="https://us.govee.com/pages/contact-us" style="color:#b8336a">us.govee.com/pages/contact-us</a></span>
+      </div>
     </div>
   </div>
 
   <footer>
-    Pipeline auto-updates. New leads appear in "Inbound Queue" within 24h of arrival.<br/>
-    Manual intervention only for: draft approval, scam verification, deal negotiation.
+    Auto-updating. Daily blitz sends 5 queued brands at 2:00 PM EST.<br/>
+    Pipeline: 48 total | 21 sent | 27 queued | 0 replies | 4 bounced
   </footer>
 </div>
+
+<script>
+function toggle(id) {
+  document.getElementById(id).classList.toggle('collapsed');
+}
+</script>
 </body>
 </html>
