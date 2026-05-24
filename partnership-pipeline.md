@@ -69,48 +69,54 @@
 
 ---
 
-## 📤 OUTBOUND TARGETS (Next Batch)
+## 🎯 PRIORIDAD REALISTA — ACTUALIZADO 2026-05-24
 
-### OB-001: Elgato
+### TIER SÍ (Envíalos esta semana)
+
+#### OB-001: Elgato (CORSAIR) — PRIORIDAD #1
 - **Email:** mediarelations@elgato.com
 - **Channel:** PredLabs
-- **Type:** Hardware (Capture cards, Stream Deck, Key Lights)
-- **Status:** READY TO SEND
-- **Why:** Perfect fit para PredLabs (OBS/streaming gear reviews)
+- **Type:** Hardware (Stream Deck, Key Lights, capture cards)
+- **Status:** ✅ SENT 2026-05-24
+- **Why:** PredLabs hace exactamente su contenido: OBS, streaming, hardware reviews. Son la marca más accesible para creadores mid-tier. Envían productos a canales de 10K+.
 
-### OB-002: HyperX
+#### OB-002: HyperX — PRIORIDAD #2
 - **Email:** press@hyperx.com
 - **Channel:** Predz0rx
 - **Type:** Hardware (Headsets, keyboards, mice)
-- **Status:** READY TO SEND
-- **Why:** Gaming peripherals, shooters focus
+- **Status:** READY TO DRAFT
+- **Why:** 71K subs + shooters = calificas. Programa de creadores activo.
 
-### OB-003: Secretlab
-- **Email:** press@secretlab.co
-- **Channel:** Predz0rx
-- **Type:** Hardware (Gaming chairs)
-- **Status:** READY TO SEND
-- **Why:** Long gaming sessions, professional setup
-
-### OB-004: NVIDIA
-- **Email:** press@nvidia.com
-- **Channel:** Both
-- **Type:** Hardware (GPUs, paid campaigns)
-- **Status:** READY TO SEND
-- **Why:** RTX 3090 user, high-tier gaming content
-
-### OB-005: SteelSeries
+#### OB-003: SteelSeries — PRIORIDAD #3
 - **Email:** press@steelseries.com
 - **Channel:** Predz0rx
 - **Type:** Hardware (Peripherals)
-- **Status:** READY TO SEND
+- **Status:** READY TO DRAFT
+- **Why:** `#SteelSeriesPartner` programa específico para streamers/creadores.
 
-### OB-006: DJI
-- **Email:** press@dji.com
+#### OB-004: Govee — PRIORIDAD #4
+- **Email:** support@govee.com (o buscar partnerships@govee.com)
 - **Channel:** PredLabs
-- **Type:** Hardware (Creator cameras, gimbals)
-- **Status:** READY TO SEND
-- **Why:** PredLabs hace reviews de hardware, cámaras son relevantes
+- **Type:** Hardware (Smart lights, ya tienes 43 dispositivos)
+- **Status:** READY TO DRAFT
+- **Why:** Ya eres usuario masivo. Tienes credibilidad demostrada. Puedes ofrecer review honesta de su ecosystem.
+
+#### OB-005: Fifine / Maono — PRIORIDAD #5
+- **Email:** (buscar en sus webs)
+- **Channel:** PredLabs
+- **Type:** Hardware (Budget microphones)
+- **Status:** RESEARCH NEEDED
+- **Why:** Envían samples fácil. No piden números enormes.
+
+### TIER NO (todavía)
+
+| Marca | Por qué NO ahora |
+|-------|------------------|
+| AMD | Red Team = 500K+ creadores de PC builds. Rebotó 3 veces. |
+| NVIDIA | press@nvidia.com = creadores tier-1. Long shot. |
+| Secretlab | Muy selectivo. Intentar después de Elgato. |
+| ASUS ROG | Creator Alliance necesita más tracción. |
+| DJI | Más para fotógrafos/cineastas. PredLabs no es ese nicho aún. |
 
 ---
 
@@ -140,9 +146,9 @@
 
 ## 🎯 THIS WEEK'S ACTIONS
 
-1. **URGENT:** Corregir contacto AMD — buscar email alternativo
-2. **VERIFY:** Enviar bait reply a MoClaw/Tinay para confirmar legitimidad
-3. **SEND:** Draft + preview de outbound a Elgato (PredLabs)
-4. **SEND:** Draft + preview de outbound a HyperX (Predz0rx)
-5. **IGNORE:** Todo Keymailer, Streamers Connected, TikTok Shop mass email
+1. ✅ **SENT:** Elgato (PredLabs) — 2026-05-24. Awaiting response.
+2. ✅ **SENT:** Bait reply a MoClaw/Tinay — 2026-05-24. Awaiting verification.
+3. **RESEARCH:** Buscar email correcto de Govee partnerships (no support)
+4. **DRAFT:** HyperX (Predz0rx) — PRIORIDAD #2
+5. **CANCEL:** AMD definitivamente. No reintentar hasta 200K+ subs.
 6. **SCAN:** Daily cron a las 11:00 AM para nuevos emails
