@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Predz Content Hub</title>
+<style>
+  :root{--bg:#0a0a0f;--card:#12121a;--border:#1e1e2e;--text:#e0e0e0;--muted:#888;--accent:#b8336a;--accent2:#ff6b9d;--green:#4ade80;--yellow:#facc15;--blue:#60a5fa;--purple:#c084fc;--red:#f87171}
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.5;padding:16px;min-height:100vh}
+  header{margin-bottom:20px}
+  h1{font-size:1.5rem;font-weight:700;background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+  .subtitle{color:var(--muted);font-size:.85rem;margin-top:4px}
+  .pin-gate{position:fixed;inset:0;background:var(--bg);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px}
+  .pin-gate h2{color:var(--text);margin-bottom:24px;font-size:1.3rem}
+  .pin-input{display:flex;gap:10px;margin-bottom:16px}
+  .pin-input input{width:50px;height:60px;text-align:center;font-size:1.5rem;background:var(--card);border:2px solid var(--border);color:var(--text);border-radius:10px;outline:none;caret-color:var(--accent)}
+  .pin-input input:focus{border-color:var(--accent)}
+  .btn{width:100%;max-width:260px;padding:14px;background:var(--accent);color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:600;cursor:pointer}
+  .btn:disabled{opacity:.4;cursor:not-allowed}
+  .error{color:var(--red);font-size:.85rem;margin-top:8px;text-align:center;display:none}
+  .hidden{display:none !important}
+  .search-box{width:100%;padding:12px 16px;background:var(--card);border:1px solid var(--border);border-radius:12px;color:var(--text);font-size:1rem;margin-bottom:16px;outline:none}
+  .search-box:focus{border-color:var(--accent)}
+  .tabs{display:flex;gap:8px;overflow-x:auto;padding-bottom:8px;margin-bottom:16px;-webkit-overflow-scrolling:touch}
+  .tab{white-space:nowrap;padding:8px 16px;background:var(--card);border:1px solid var(--border);border-radius:20px;font-size:.85rem;color:var(--muted);cursor:pointer;transition:all .2s}
+  .tab.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .content-list{display:flex;flex-direction:column;gap:12px}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;transition:border .2s}
+  .card:hover{border-color:var(--accent)}
+  .card-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+  .card-title{font-weight:700;font-size:1rem}
+  .badge{font-size:.7rem;padding:4px 10px;border-radius:12px;font-weight:600;text-transform:uppercase}
+  .badge-draft{background:rgba(250,204,20,.15);color:var(--yellow)}
+  .badge-review{background:rgba(96,165,250,.15);color:var(--blue)}
+  .badge-approved{background:rgba(74,222,128,.15);color:var(--green)}
+  .badge-published{background:rgba(192,132,252,.15);color:var(--purple)}
+  .badge-archived{background:rgba(136,136,136,.15);color:var(--muted)}
+  .card-meta{color:var(--muted);font-size:.8rem;margin-bottom:8px}
+  .card-desc{color:var(--text);font-size:.9rem;margin-bottom:12px;line-height:1.5}
+  .card-actions{display:flex;gap:8px;flex-wrap:wrap}
+  .card-btn{padding:6px 12px;border-radius:8px;font-size:.8rem;font-weight:600;border:none;cursor:pointer;text-decoration:none;display:inline-block}
+  .btn-view{background:var(--accent);color:#fff}
+  .btn-copy{background:var(--card);color:var(--text);border:1px solid var(--border)}
+  .btn-link{background:rgba(96,165,250,.15);color:var(--blue)}
+  .stats{display:flex;gap:16px;margin-bottom:16px;overflow-x:auto}
+  .stat{min-width:100px;text-align:center;padding:14px;background:var(--card);border:1px solid var(--border);border-radius:12px}
+  .stat-num{font-size:1.5rem;font-weight:700;color:var(--accent)}
+  .stat-label{font-size:.75rem;color:var(--muted);margin-top:4px}
+  .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--green);color:#000;padding:12px 20px;border-radius:10px;font-size:.9rem;font-weight:600;opacity:0;transition:opacity .3s;z-index:1000}
+  .toast.show{opacity:1}
+  .empty{text-align:center;padding:40px 20px;color:var(--muted)}
+  .empty-icon{font-size:3rem;margin-bottom:12px}
+  .filter-section{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+  .filter-chip{padding:6px 12px;border-radius:16px;background:var(--card);border:1px solid var(--border);color:var(--muted);font-size:.8rem;cursor:pointer}
+  .filter-chip.active{background:rgba(184,51,106,.15);color:var(--accent);border-color:var(--accent)}
+  .lockout{color:var(--red);text-align:center;padding:20px}
+  @media(max-width:380px){.pin-input input{width:44px;height:52px;font-size:1.2rem}}
+</style>
+</head>
+<body>
+
+<div id="pinGate" class="pin-gate">
+  <h2>Enter PIN to access</h2>
+  <div class="pin-input">
+    <input type="password" maxlength="1" data-index="0">
+    <input type="password" maxlength="1" data-index="1">
+    <input type="password" maxlength="1" data-index="2">
+    <input type="password" maxlength="1" data-index="3">
+  </div>
+  <button class="btn" id="unlockBtn" onclick="checkPIN()" disabled>Unlock</button>
+  <p class="error" id="pinError">Wrong PIN. Try again.</p>
+  <p class="lockout hidden" id="lockoutMsg">Too many attempts. Wait 5 minutes.</p>
+</div>
+
+<div id="mainContent" class="hidden">
+  <header>
+    <h1>Predz Content Hub</h1>
+    <p class="subtitle">Everything created by Jarvis. Indexed, tracked, ready.</p>
+  </header>
+
+  <div class="stats">
+    <div class="stat"><div class="stat-num" id="statTotal">0</div><div class="stat-label">TOTAL</div></div>
+    <div class="stat"><div class="stat-num" style="color:var(--yellow)" id="statDraft1">0</div><div class="stat-label">DRAFTS</div></div>
+    <div class="stat"><div class="stat-num" style="color:var(--blue)" id="statReview">0</div><div class="stat-label">REVIEW</div></div>
+    <div class="stat"><div class="stat-num" style="color:var(--green)" id="statApproved">0</div><div class="stat-label">APPROVED</div></div>
+    <div class="stat"><div class="stat-num" style="color:var(--purple)" id="statPublished">0</div><div class="stat-label">PUBLISHED</div></div>
+  </div>
+
+  <input type="text" class="search-box" id="searchBox" placeholder="Search titles, tags, content..." oninput="filterContent()">
+
+  <div class="tabs" id="tabContainer">
+    <div class="tab active" onclick="setTab('all')">All</div>
+    <div class="tab" onclick="setTab('sponsored')">Sponsored</div>
+    <div class="tab" onclick="setTab('partnerships')">Partnerships</div>
+    <div class="tab" onclick="setTab('newsletter')">Newsletter</div>
+    <div class="tab" onclick="setTab('x-content')">X / Content</div>
+    <div class="tab" onclick="setTab('tech')">Tech/Scripts</div>
+  </div>
+
+  <div class="filter-section" id="statusFilter">
+    <div class="filter-chip active" onclick="setStatus('all')">All Status</div>
+    <div class="filter-chip" onclick="setStatus('draft')">Draft</div>
+    <div class="filter-chip" onclick="setStatus('review')">Review</div>
+    <div class="filter-chip" onclick="setStatus('approved')">Approved</div>
+    <div class="filter-chip" onclick="setStatus('published')">Published</div>
+  </div>
+
+  <div class="content-list" id="contentList"></div>
+</div>
+
+<div class="toast" id="toast">Copied to clipboard</div>
+
+<script>
+const CORRECT_HASH = '1d10cfa4a998611c236404e1649c24192e43565df01fa559303d6ca6d887226b';
+let attempts = parseInt(localStorage.getItem('pinAttempts') || '0');
+let lockoutUntil = parseInt(localStorage.getItem('lockoutUntil') || '0');
+const inputs = document.querySelectorAll('.pin-input input');
+
+// PIN handling
+inputs.forEach((input, idx) => {
+  input.addEventListener('input', e => {
+    if(e.target.value) {
+      if(idx < inputs.length - 1) inputs[idx + 1].focus();
+      checkAllFilled();
+    }
+  });
+  input.addEventListener('keydown', e => {
+    if(e.key === 'Backspace' && !e.target.value && idx > 0) inputs[idx - 1].focus();
+  });
+});
+
+function checkAllFilled() {
+  const val = Array.from(inputs).map(i => i.value).join('');
+  document.getElementById('unlockBtn').disabled = val.length !== 4;
+}
+
+async function sha256(str) {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
+}
+
+async function checkPIN() {
+  const now = Date.now();
+  if(now < lockoutUntil) return;
+  const pin = Array.from(inputs).map(i => i.value).join('');
+  const hash = await sha256(pin);
+  if(hash === CORRECT_HASH) {
+    localStorage.setItem('pinVerified', 'true');
+    localStorage.removeItem('pinAttempts');
+    localStorage.removeItem('lockoutUntil');
+    showMain();
+  } else {
+    attempts++;
+    localStorage.setItem('pinAttempts', attempts);
+    document.getElementById('pinError').style.display = 'block';
+    inputs.forEach(i => i.value = '');
+    inputs[0].focus();
+    if(attempts >= 3) {
+      lockoutUntil = now + 300000;
+      localStorage.setItem('lockoutUntil', lockoutUntil);
+      document.getElementById('lockoutMsg').classList.remove('hidden');
+      document.getElementById('pinError').style.display = 'none';
+    }
+  }
+}
+
+function showMain() {
+  document.getElementById('pinGate').classList.add('hidden');
+  document.getElementById('mainContent').classList.remove('hidden');
+  renderContent();
+  updateStats();
+}
+
+if(localStorage.getItem('pinVerified') === 'true') showMain();
+
+// Content Database
+const contentDB = [
+  {
+    id: 'ygg-2026-05-23-1',
+    title: 'YGG Play Post #1 — AI x Vibe Coding',
+    category: 'sponsored',
+    status: 'draft',
+    date: '2026-05-23',
+    brand: '@YGG_Play',
+    platform: 'X / @predz0rx',
+    desc: 'Positioning YGG Play as AI-native casual game publisher. References #3 BlockchainGamer.biz ranking.',
+    tags: ['YGG','sponsored','web3','AI','vibe-coding'],
+    body: `I spend my days building content with AI.\n\nYGG Play spends theirs building games with AI.\n\nThey call it "vibe coding" — an explosion of casual games built with LLM assistance.\n\nSame tools I use for my videos.\nSame pipeline. Different output.\n\nYGG Play is not another web3 game studio trying to make the next AAA shooter.\n\nThey publish casual degen games.\nTap. Swipe. Win.\n\nLOL Land. Waifu Sweeper. GIGA CHAT BAT.\n\nGames your mom could play but your degen uncle would max out with leverage.\n\nThey hit #3 on BlockchainGamer.biz top 50 list this quarter.\nNot from hype. From shipping actual games people play.\n\nI respect builders who ship.\nThat is why I partnered with @YGG_Play.\n\nIf you vibe code, if you degen trade, if you think AI should work for you not replace you, you need to see what they are building.\n\nLink in bio. Tell them Predz sent you.\n\n#YGG #YGGPlay #sponsored #vibecoding`
+  },
+  {
+    id: 'ygg-2026-05-23-2',
+    title: 'YGG Play Post #2 — $CHAD Token Economics',
+    category: 'sponsored',
+    status: 'draft',
+    date: '2026-05-23',
+    brand: '@YGG_Play',
+    platform: 'X / @predz0rx',
+    desc: 'Comparing CS2 case opening to YGG Play Play-to-Airdrop mechanics. References $CHAD Token, Points Boost, Launchpad.',
+    tags: ['YGG','sponsored','CHAD','token','economy'],
+    body: `I have opened 400+ CS2 cases in my life.\n\nTotal return? A Stattrak Tec-9 worth $12.\n\nMeanwhile @YGG_Play just dropped $CHAD Token.\n\nPlay-to-Airdrop. Points Boost on the Launchpad.\nToken allocations based on actual grinding.\n\nTheir system: play casual degen games, earn points, boost your allocation, claim tokens.\n\nNot hope. Not luck. Not "maybe tomorrow I get the knife."\n\nActual measurable upside from playtime.\n\nRoach Race. Proof of Play. Gigaverse.\n\nI would rather grind Roach Racing Club and know exactly what my points get me than open another case praying for a red.\n\nHere is the thing Valve will never admit:\ncasual games with token mechanics are more honest lootboxes.\n\nAt least you know the math.\n\nYGG Play is my sponsor because their economy makes sense.\n\nDrop a reply if you have ever done the case opening depression spiral.\n\n#YGG #YGGPlay #CHADToken #sponsored`
+  },
+  {
+    id: 'ygg-2026-05-23-3',
+    title: 'YGG Play Post #3 — Creator Program x OSC',
+    category: 'sponsored',
+    status: 'draft',
+    date: '2026-05-23',
+    brand: '@YGG_Play',
+    platform: 'X / @predz0rx',
+    desc: 'Connecting Old School Club community with YGG Play Creator Program. References Verse8 hackathon, Korea Buidl Week.',
+    tags: ['YGG','sponsored','OSC','community','creator-economy'],
+    body: `5 years ago I had 20 people in a CS:S server.\n\nToday Old School Club is 3200+ deep.\n\nSame energy. Same grind.\n\nBut @YGG_Play built something I could never scale alone:\n\nLaunchpad infrastructure. Creator program. Actual rewards for driving players.\n\nI run a community. They run the system that funds communities.\n\nTheir hackathon with Verse8 during Korea Buidl Week produced games I am already testing.\n\nTheir Creator Program is looking for people looking for exactly what I have:\na group that actually shows up.\n\nIf you are an Old School member, this is not generic sponsor talk.\n\nThis is a direct pipeline for our community to get early access, token allocations, and tournament slots through YGG Play.\n\nCommunity plus platform equals outcome.\n\nThat is what I am building.\n\nReply "YGG" below and I will DM you the early sign-up link.\n\n#OldSchoolClub #YGGPlay #sponsored #creatoreconomy`
+  },
+  {
+    id: 'ygg-2026-05-23-4',
+    title: 'YGG Play Post #4 — IP Crossover x Culture',
+    category: 'sponsored',
+    status: 'draft',
+    date: '2026-05-23',
+    brand: '@YGG_Play',
+    platform: 'X / @predz0rx',
+    desc: 'Highlighting YGG Play cultural crossovers: GIGA CHAT BAT x Bearish AF, Waifu Sweeper x Hypebeast HK.',
+    tags: ['YGG','sponsored','crossover','culture','degen'],
+    body: `YGG Play does crossovers that actually hit.\n\nNot the lazy "skin collab" every shooter does in season 5.\n\nTheir baseball game GIGA CHAT BAT partnered with Bearish AF, the biggest IP on Abstract after Pudgy Penguins.\n\nWaifu Sweeper showed up at Hypebeast's 20th anniversary exhibition in Hong Kong luxury retail.\n\nThis is degen culture meeting the mainstream without selling out.\n\nThey understand what their players actually care about.\nMeme IP. Luxury crossovers. Games that feel native to the platforms people already use.\n\nI have seen too many web3 games fail because they wanted to be everything and ended up nothing.\n\nYGG Play picked their lane:\ncasual games. degen outcomes. cultural collabs.\n\nAnd they stayed in it.\n\nThat is why they are my sponsor. Not because they are the biggest. Because they actually know who they are.\n\nWhat crossover game would you actually play?\n\n#YGGPlay #GIGACHADBAT #BearishAF #sponsored`
+  },
+  {
+    id: 'partnership-dashboard-2026-05-21',
+    title: 'Partnership Dashboard v1.2',
+    category: 'partnerships',
+    status: 'published',
+    date: '2026-05-21',
+    brand: 'Predz0rx',
+    platform: 'Web / GitHub Pages',
+    desc: 'PIN-protected public tracker for outbound brand outreach. 13 brands contacted. Cash/hardware-only filter.',
+    tags: ['partnership','dashboard','operations','tracking'],
+    link: 'https://predz0rx.github.io/partnership-dashboard/'
+  },
+  {
+    id: 'cron-newsletter-2026-05',
+    title: 'AI Daily Newsletter Cron',
+    category: 'newsletter',
+    status: 'running',
+    date: '2026-05-21',
+    brand: 'PredLabs',
+    platform: 'Cron / Hermes',
+    desc: 'Daily 11 AM scan of AI industry RSS feeds. Auto-generates briefings for @predlabs_.',
+    tags: ['automation','AI','newsletter','cron'],
+  },
+  {
+    id: 'cron-inbox-2026-05',
+    title: 'Partnership Inbox Scanner',
+    category: 'partnerships',
+    status: 'running',
+    date: '2026-05-21',
+    brand: 'Predz0rx',
+    platform: 'Cron / Hermes',
+    desc: 'Daily 11 AM email scan for inbound partnership opportunities. Hardware/cash filter.',
+    tags: ['automation','partnership','email','cron'],
+  },
+  {
+    id: 'govee-integration-2026-05',
+    title: 'Govee Smart Home API v2',
+    category: 'tech',
+    status: 'active',
+    date: '2026-05-22',
+    brand: 'Predz0rx',
+    platform: 'WSL / Hermes',
+    desc: 'Cloud API v2 integration for 43 Govee devices. On/off, brightness, color, scene control.',
+    tags: ['smarthome','API','Govee','automation'],
+  },
+  {
+    id: 'openclaw-removal-2026-05',
+    title: 'OpenClaw Elimination Complete',
+    category: 'tech',
+    status: 'done',
+    date: '2026-05-22',
+    brand: 'Predz0rx',
+    platform: 'WSL + Windows',
+    desc: 'All processes killed, Task Scheduler tasks removed, aliases blocked. Hermes-only operation.',
+  tags: ['security','cleanup','OpenClaw','Hermes'],
+  },
+  {
+    id: 'hermes-dashboard-2026-05',
+    title: 'Hermes Agent Dashboard',
+    category: 'tech',
+    status: 'running',
+    date: '2026-05-22',
+    brand: 'Predz0rx',
+    platform: 'WSL / LAN',
+    desc: 'Local Hermes dashboard accessible from 192.168.50.45:9119 across home network.',
+    tags: ['infrastructure','Hermes','dashboard','WSL'],
+  },
+  {
+    id: 'partnership-outreach-batch1',
+    title: 'Outbound Partnership Batch #1',
+    category: 'partnerships',
+    status: 'approved',
+    date: '2026-05-21',
+    brand: 'Predz0rx',
+    platform: 'Email',
+    desc: '13 brands contacted: Razer, NVIDIA, SteelSeries, Secretlab, Logitech, HyperX, Elgato, ASUS, MSI, Gigabyte, Cooler Master, NZXT, Corsair.',
+    tags: ['outreach','hardware','esports','partnership'],
+  },
+  {
+    id: 'ygg-play-research',
+    title: 'YGG Play Deep Research',
+    category: 'sponsored',
+    status: 'done',
+    date: '2026-05-23',
+    brand: 'YGG_Play',
+    platform: 'Research',
+    desc: 'Full audit of yggplay.fun: Games (LOL Land, Waifu Sweeper, GIGA CHAT BAT, Roach Race, Gigaverse, Proof of Play), News, Launchpad, $CHAD token mechanics.',
+    tags: ['research','YGG','sponsored','web3'],
+  }
+];
+
+let currentTab = 'all';
+let currentStatus = 'all';
+let searchQuery = '';
+
+function setTab(tab) {
+  currentTab = tab;
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  event.target.classList.add('active');
+  renderContent();
+}
+
+function setStatus(status) {
+  currentStatus = status;
+  document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+  event.target.classList.add('active');
+  renderContent();
+}
+
+function filterContent() {
+  searchQuery = document.getElementById('searchBox').value.toLowerCase();
+  renderContent();
+}
+
+function renderContent() {
+  const list = document.getElementById('contentList');
+  let items = contentDB;
+
+  if(currentTab !== 'all') items = items.filter(c => c.category === currentTab);
+  if(currentStatus !== 'all') items = items.filter(c => c.status === currentStatus);
+  if(searchQuery) items = items.filter(c => 
+    c.title.toLowerCase().includes(searchQuery) ||
+    c.desc.toLowerCase().includes(searchQuery) ||
+    c.tags.some(t => t.toLowerCase().includes(searchQuery)) ||
+    (c.brand && c.brand.toLowerCase().includes(searchQuery))
+  );
+
+  if(items.length === 0) {
+    list.innerHTML = '<div class="empty"><div class="empty-icon">🔍</div><p>No items found</p></div>';
+    return;
+  }
+
+  list.innerHTML = items.map(item => `
+    <div class="card" data-id="${item.id}">
+      <div class="card-header">
+        <span class="card-title">${escapeHtml(item.title)}</span>
+        <span class="badge badge-${item.status}">${item.status}</span>
+      </div>
+      <div class="card-meta">${item.date} · ${item.platform} · ${item.brand} ${item.category ? '· ' + item.category.toUpperCase() : ''}</div>
+      <div class="card-desc">${escapeHtml(item.desc)}</div>
+      <div class="card-actions">
+        ${item.body ? `<button class="card-btn btn-view" onclick="viewContent('${item.id}')">View Full</button>` : ''}
+        ${item.body ? `<button class="card-btn btn-copy" onclick="copyContent('${item.id}')">Copy</button>` : ''}
+        ${item.link ? `<a href="${item.link}" target="_blank" class="card-btn btn-link">Open</a>` : ''}
+      </div>
+    </div>
+  `).join('');
+}
+
+function escapeHtml(text) {
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
+}
+
+function viewContent(id) {
+  const item = contentDB.find(c => c.id === id);
+  if(!item || !item.body) return;
+  const newWindow = window.open('', '_blank');
+  newWindow.document.write(`
+    <html><head><title>${item.title}</title><style>
+    body{background:#0a0a0f;color:#e0e0e0;font-family:sans-serif;max-width:600px;margin:0 auto;padding:20px;line-height:1.6}
+    h1{color:#b8336a;font-size:1.3rem}
+    pre{white-space:pre-wrap;word-wrap:break-word;background:#12121a;padding:16px;border-radius:10px;border:1px solid #1e1e2e}
+    .meta{color:#888;font-size:.85rem;margin-bottom:16px}
+    </style></head><body>
+    <h1>${item.title}</h1>
+    <div class="meta">${item.date} · ${item.platform} · ${item.brand} · Status: ${item.status}</div>
+    <pre>${escapeHtml(item.body)}</pre>
+    </body></html>
+  `);
+}
+
+function copyContent(id) {
+  const item = contentDB.find(c => c.id === id);
+  if(!item || !item.body) return;
+  navigator.clipboard.writeText(item.body).then(() => showToast());
+}
+
+function showToast() {
+  const t = document.getElementById('toast');
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2000);
+}
+
+function updateStats() {
+  document.getElementById('statTotal').textContent = contentDB.length;
+  document.getElementById('statDraft1').textContent = contentDB.filter(c => c.status === 'draft').length;
+  document.getElementById('statReview').textContent = contentDB.filter(c => c.status === 'review').length;
+  document.getElementById('statApproved').textContent = contentDB.filter(c => c.status === 'approved').length;
+  document.getElementById('statPublished').textContent = contentDB.filter(c => c.status === 'published' || c.status === 'running').length;
+}
+</script>
+</body>
+</html>
