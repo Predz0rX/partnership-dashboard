@@ -1,5 +1,6 @@
 # Partnership Pipeline — Predz Brands
-*Last updated: 2026-05-24*
+*Last updated: 2026-05-25*
+*Mission: 1 sponsor per channel by June 24, 2026*
 
 ## 🔴 BOUNCED / NEEDS FIX
 
@@ -7,8 +8,8 @@
 - **Email:** redteam@amd.com ❌ BOUNCED (550 RecipientNotFound)
 - **Channel:** Predz0rx / PredLabs
 - **Type:** Hardware (CPUs, GPUs)
-- **Status:** BOUNCED — email no existe
-- **Action:** Buscar contacto correcto (¿amdredteam@amd.com? ¿creator@amd.com?)
+- **Status:** 🚫 CANCELLED — No reintentar hasta 200K+ subs
+- **Action:** AMD Red Team = 500K+ creadores de PC builds. Predz es shooters/tech, no builds.
 - **Attempts:** 3 emails rebotados el 2026-05-21
 
 ---
@@ -24,131 +25,222 @@
 - **Why:** Remitente es Gmail personal, no dominio corporativo. Dice "paid" pero necesita verificación.
 - **URL:** https://moclaw.dev
 - **Proposal:** Cloud hosting para OpenClaw + DeepSeek V4 Pro, "At-Cost pricing"
-- **Action:** Bait reply solicitando: tarifas exactas, método de pago, contrato, ejemplos de campaigns previos
-- **Status:** Awaiting verification
+- **Bait Reply Sent:** 2026-05-24
+- **Questions Asked:** Tarifa exacta, método de pago, contrato, ejemplos previos, dominio corporativo
+- **Status:** Awaiting verification — si no responde con datos concretos → confirmed scam
 
 ---
 
-## 🟢 LOW VALUE / CANCELLED
+## 📤 OUTBOUND SENT — ACTIVE CAMPAIGN
 
-### C-001: Streamers Connected
-- **Sender:** Charleyy <creators@streamersconnected.com>
-- **Subject:** Request to Co-Stream | Future Games Show + PC Gaming Show
-- **Channel:** Predz0rx
-- **Type:** Co-stream / Exposure
-- **Verdict:** 🚫 NO VALUE — Exposure only, no pago, no hardware
-- **Action:** Ignorar. No responde al value filter del usuario.
-
-### C-002: Keymailer (múltiple)
-- **Senders:** Keymailer, Cecil@GamerskyGames, Kabam
-- **Subjects:** Game keys, pre-approvals, Steam Ocean Fest
-- **Type:** Free game keys
-- **Verdict:** 🚫 NO VALUE — Keys only, no cash, no hardware
-- **Action:** Ignorar sistemáticamente
-
-### C-003: TikTok Shop
-- **Sender:** Jordan from TikTok <jordan@shop.tiktok.com>
-- **Subject:** Scale faster with TikTok Shop's creator network
-- **Type:** Platform onboarding
-- **Verdict:** 🟢 LOW VALUE — Mass email, no personalizado. Predz no vende productos físicos.
-- **Action:** Ignorar por ahora
-
-### C-004: Buffer Creator Camp
-- **Sender:** Sabreen from Buffer
-- **Subject:** You're invited to our first-ever Creator Camp: Growth edition!
-- **Type:** Event / Educational
-- **Verdict:** 🟢 LOW VALUE — No monetización directa
-- **Action:** Ignorar
-
-### C-005: Lenovo Creator Community
-- **Sender:** Lenovo Creators Community
-- **Subject:** Latest Roundup (Giveaways, News & Resources)
-- **Type:** Community newsletter
-- **Verdict:** 🟢 LOW VALUE — No oferta directa
-- **Action:** Ignorar
-
----
-
-## 🎯 PRIORIDAD REALISTA — ACTUALIZADO 2026-05-24
-
-### TIER SÍ (Envíalos esta semana)
-
-#### OB-001: Elgato (CORSAIR) — PRIORIDAD #1
+### OB-001: Elgato (CORSAIR) — PRIORIDAD #1 ✅ SENT
 - **Email:** mediarelations@elgato.com
 - **Channel:** PredLabs
 - **Type:** Hardware (Stream Deck, Key Lights, capture cards)
-- **Status:** ✅ SENT 2026-05-24
-- **Why:** PredLabs hace exactamente su contenido: OBS, streaming, hardware reviews. Son la marca más accesible para creadores mid-tier. Envían productos a canales de 10K+.
+- **Sent:** 2026-05-24
+- **Pitch:** OBS integration, real creator workflows, audience LATAM/USA en español
+- **Status:** ⏳ Awaiting response
+- **Follow-up 1:** 2026-05-29 (Día 5)
+- **Follow-up 2:** 2026-06-05 (Día 12)
+- **Follow-up 3:** 2026-06-12 (Día 19)
 
-#### OB-002: HyperX — PRIORIDAD #2
+### OB-002: HyperX — PRIORIDAD #2 ✅ SENT
 - **Email:** press@hyperx.com
 - **Channel:** Predz0rx
 - **Type:** Hardware (Headsets, keyboards, mice)
-- **Status:** READY TO DRAFT
-- **Why:** 71K subs + shooters = calificas. Programa de creadores activo.
+- **Sent:** 2026-05-25
+- **Pitch:** Gameplay-integrated demos de periféricos en shooters, OSC community de 3200+
+- **Status:** ⏳ Awaiting response
+- **Follow-up 1:** 2026-05-30 (Día 5)
+- **Follow-up 2:** 2026-06-06 (Día 12)
+- **Follow-up 3:** 2026-06-13 (Día 19)
 
-#### OB-003: SteelSeries — PRIORIDAD #3
+### OB-003: SteelSeries — PRIORIDAD #3 ✅ SENT
 - **Email:** press@steelseries.com
 - **Channel:** Predz0rx
 - **Type:** Hardware (Peripherals)
-- **Status:** READY TO DRAFT
-- **Why:** `#SteelSeriesPartner` programa específico para streamers/creadores.
+- **Sent:** 2026-05-25
+- **Pitch:** Arctis/Apex/Rival gameplay integration en CS + ARC Raiders, OSC community
+- **Status:** ⏳ Awaiting response
+- **Follow-up 1:** 2026-05-30 (Día 5)
+- **Follow-up 2:** 2026-06-06 (Día 12)
+- **Follow-up 3:** 2026-06-13 (Día 19)
 
-#### OB-004: Govee — PRIORIDAD #4
-- **Email:** support@govee.com (o buscar partnerships@govee.com)
+### OB-004: Govee — PRIORIDAD #4 ✅ SENT
+- **Email:** partnerships@govee.com
 - **Channel:** PredLabs
 - **Type:** Hardware (Smart lights, ya tienes 43 dispositivos)
-- **Status:** READY TO DRAFT
-- **Why:** Ya eres usuario masivo. Tienes credibilidad demostrada. Puedes ofrecer review honesta de su ecosystem.
+- **Sent:** 2026-05-25
+- **Pitch:** Power user con 43 devices, API integration demos, DreamView + OBS sync
+- **Status:** ⏳ Awaiting response
+- **Follow-up 1:** 2026-05-30 (Día 5)
+- **Follow-up 2:** 2026-06-06 (Día 12)
+- **Follow-up 3:** 2026-06-13 (Día 19)
 
-#### OB-005: Fifine / Maono — PRIORIDAD #5
-- **Email:** (buscar en sus webs)
+### OB-005: Streamlabs — PRIORIDAD #5 ✅ SENT
+- **Email:** creators@streamlabs.com
 - **Channel:** PredLabs
-- **Type:** Hardware (Budget microphones)
-- **Status:** RESEARCH NEEDED
-- **Why:** Envían samples fácil. No piden números enormes.
+- **Type:** Software (Streamlabs Desktop / Ultra)
+- **Sent:** 2026-05-25
+- **Pitch:** Workflow integration con smart lighting APIs, Ultra themes, monetization stack
+- **Status:** ⏳ Awaiting response
+- **Follow-up 1:** 2026-05-30 (Día 5)
+- **Follow-up 2:** 2026-06-06 (Día 12)
+- **Follow-up 3:** 2026-06-13 (Día 19)
 
-### TIER NO (todavía)
-
-| Marca | Por qué NO ahora |
-|-------|------------------|
-| AMD | Red Team = 500K+ creadores de PC builds. Rebotó 3 veces. |
-| NVIDIA | press@nvidia.com = creadores tier-1. Long shot. |
-| Secretlab | Muy selectivo. Intentar después de Elgato. |
-| ASUS ROG | Creator Alliance necesita más tracción. |
-| DJI | Más para fotógrafos/cineastas. PredLabs no es ese nicho aún. |
+### OB-006: Razer — PRIORIDAD #6 ✅ SENT
+- **Email:** streamer@razer.com
+- **Channel:** Predz0rx
+- **Type:** Hardware (Peripherals)
+- **Sent:** 2026-05-25
+- **Pitch:** BlackShark/Huntsman/DeathAdder gameplay integration en CS + ARC Raiders
+- **Status:** ⏳ Awaiting response
+- **Follow-up 1:** 2026-05-30 (Día 5)
+- **Follow-up 2:** 2026-06-06 (Día 12)
+- **Follow-up 3:** 2026-06-13 (Día 19)
 
 ---
 
-## ⚠️ SPAM / AUTO-REJECT
+## 🎯 NEXT BATCH (Si no hay respuestas en 14 días)
 
-- Neil Patel (marketing spam)
-- Andrew Bolis ("Make $7000/Month" scams)
-- Canva AI 2.0 (product marketing)
-- Product Hunt Daily (newsletter)
-- Creator Spotlight (YouTube newsletter)
-- IGN Newsletter (media outlet)
+### NB-001: NordVPN
+- **Email:** affiliates@nordvpn.com
+- **Channel:** Predz0rx
+- **Type:** Software (VPN)
+- **Why:** Gaming privacy + region unlocks, programa de affiliates activo
+
+### NB-002: Fifine
+- **Email:** (research en web)
+- **Channel:** PredLabs
+- **Type:** Hardware (Budget microphones)
+- **Why:** Envían samples fácil, no piden números enormes
+
+### NB-003: Maono
+- **Email:** (research en web)
+- **Channel:** PredLabs
+- **Type:** Hardware (Budget microphones)
+- **Why:** Programa de creadores accesible
+
+### NB-004: Secretlab
+- **Email:** press@secretlab.co
+- **Channel:** Predz0rx
+- **Type:** Hardware (Gaming chairs)
+- **Why:** Más selectivo, intentar después de cerrar primer sponsor
+
+### NB-005: ASUS ROG
+- **Email:** rog.asus.com/partnerships.html
+- **Channel:** Predz0rx
+- **Type:** Hardware (Peripherals, builds)
+- **Why:** Creator Alliance, necesita más tracción
+
+---
+
+## 🚫 CANCELLED / NO VALUE
+
+| Marca | Razón | Acción |
+|-------|-------|--------|
+| AMD | Bounced 3x, target 500K+ | Cancelado hasta 200K+ |
+| Keymailer | Keys only, no cash/hardware | Ignorar sistemáticamente |
+| Streamers Connected | Exposure only | Ignorar |
+| TikTok Shop | Mass email, no personalizado | Ignorar |
+| Buffer Creator Camp | Event/educational | Ignorar |
+| Lenovo Creator Community | Newsletter | Ignorar |
+| Neil Patel | Marketing spam | Auto-reject |
+| Andrew Bolis | Scam ($7000/month) | Auto-reject |
+| Canva AI 2.0 | Product marketing | Ignorar |
+| Product Hunt | Newsletter | Ignorar |
+| Creator Spotlight | YouTube newsletter | Ignorar |
+| IGN Newsletter | Media outlet | Ignorar |
 
 ---
 
 ## 📊 STATS
 
-| Metric | Count |
-|--------|-------|
-| Total Inbound Scanned | 30 days |
-| Partnership-Relevant | 12 |
-| High Value (Cash/Hardware) | 1 (suspicious) |
+| Métrica | Valor |
+|---------|-------|
+| Total Outbounds Sent | 6 |
+| Predz0rx Outbounds | 3 (HyperX, SteelSeries, Razer) |
+| PredLabs Outbounds | 3 (Elgato, Govee, Streamlabs) |
 | Bounced | 1 (AMD) |
-| Scam/Low Value | 6 |
-| Outbound Ready | 6 |
+| Scam/Suspicious | 1 (MoClaw) |
+| Awaiting Response | 6 |
+| In Negotiation | 0 |
+| Closed/Signed | 0 |
 
 ---
 
-## 🎯 THIS WEEK'S ACTIONS
+## 📅 CALENDARIO DE SEGUIMIENTO
 
-1. ✅ **SENT:** Elgato (PredLabs) — 2026-05-24. Awaiting response.
-2. ✅ **SENT:** Bait reply a MoClaw/Tinay — 2026-05-24. Awaiting verification.
-3. **RESEARCH:** Buscar email correcto de Govee partnerships (no support)
-4. **DRAFT:** HyperX (Predz0rx) — PRIORIDAD #2
-5. **CANCEL:** AMD definitivamente. No reintentar hasta 200K+ subs.
-6. **SCAN:** Daily cron a las 11:00 AM para nuevos emails
+| Fecha | Acción |
+|-------|--------|
+| 2026-05-29 | Follow-up Elgato #1 |
+| 2026-05-30 | Follow-up HyperX #1, SteelSeries #1, Govee #1, Streamlabs #1, Razer #1 |
+| 2026-06-05 | Follow-up Elgato #2 |
+| 2026-06-06 | Follow-up HyperX #2, SteelSeries #2, Govee #2, Streamlabs #2, Razer #2 |
+| 2026-06-12 | Follow-up Elgato #3 |
+| 2026-06-13 | Follow-up HyperX #3, SteelSeries #3, Govee #3, Streamlabs #3, Razer #3 |
+| 2026-06-19 | Evaluación final: si no hay respuestas, lanzar Next Batch (NordVPN, Fifine, Maono, Secretlab, ASUS ROG) |
+| 2026-06-24 | **DÍA LÍMITE** — Objetivo: 1 sponsor por canal confirmado o en negociación activa |
+
+---
+
+## 🎯 VALOR PROPOSITION POR CANAL
+
+### Predz0rx (Gaming)
+**"Shooters: Counter Strike & ARC Raiders"**
+- 71K subscribers, 1,200+ videos
+- 3,200+ member community (Old School Club)
+- Twitch streaming M-F
+- Audience: International gaming, English content
+- oldschoolclub.gg como comunidad activa
+
+**Valor para marca:**
+- Demo de productos en gameplay real (no unboxing)
+- Integración en contenido de shooters
+- Alcance a comunidad gaming activa
+- Contenido en inglés = audience internacional
+
+### PredLabs (AI-Tech)
+**"Creator tools, OBS, hardware reviews & AI workflows"**
+- 16.6K subscribers, Spanish content
+- predlabs.ai como landing page
+- Focus: LATAM/USA Spanish-speaking creators
+- 43 Govee smart home devices (ecosystem depth)
+- RTX 3090 workstation
+
+**Valor para marca:**
+- Reviews técnicos profundos
+- Integration demos reales
+- Audience hispanohablante creadores (nicho valioso, poco saturado)
+- Credibilidad demostrada con hardware
+
+---
+
+## 📱 TUS URLS
+
+| Recurso | URL |
+|---------|-----|
+| **X Preview** (posts YGG_Play) | https://predz0rx.github.io/partnership-dashboard/ |
+| **Dashboard** (PIN: **2863**) | https://predz0rx.github.io/partnership-dashboard/dashboard.html |
+| **Pipeline** | https://predz0rx.github.io/partnership-dashboard/partnership-pipeline.md |
+| **30-Day Strategy** | https://predz0rx.github.io/partnership-dashboard/30-day-sponsor-strategy.md |
+
+---
+
+## 🎯 THIS WEEK'S ACTIONS (Semana 1: Blitz)
+
+1. ✅ **SENT:** Elgato (PredLabs) — 2026-05-24
+2. ✅ **SENT:** HyperX (Predz0rx) — 2026-05-25
+3. ✅ **SENT:** SteelSeries (Predz0rx) — 2026-05-25
+4. ✅ **SENT:** Govee (PredLabs) — 2026-05-25
+5. ✅ **SENT:** Streamlabs (PredLabs) — 2026-05-25
+6. ✅ **SENT:** Razer (Predz0rx) — 2026-05-25
+7. ✅ **SENT:** MoClaw bait (PredLabs) — 2026-05-24
+8. **WAITING:** Daily inbox scan a las 11:00 AM — cron activo
+9. **NEXT:** Follow-ups automáticos programados para el 29-30 de mayo
+10. **BACKUP:** Next Batch listo (NordVPN, Fifine, Maono, Secretlab, ASUS ROG) si no hay respuestas en 14 días
+
+---
+
+*Mission: 1 sponsor per channel by June 24, 2026.*
+*Status: DAY 1 — 6 outbounds sent. Full blitz mode activated.*
