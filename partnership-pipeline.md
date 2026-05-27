@@ -1,5 +1,5 @@
 # Partnership Pipeline — Predz Brands
-*Last updated: 2026-05-26 (Inbox Scan)*
+*Last updated: 2026-05-27 11:00 AM EST (Inbox Scan)*
 *Mission: 1 sponsor per channel by June 24, 2026*
 
 ## 🔴 BOUNCED / NEEDS FIX
@@ -228,18 +228,29 @@
 - **Why:** Same pattern as IN-007 but even more generic. Different Gmail address claiming to be same "Andrew" from "Shure Media". No product name, no brand, no domain. Duplicate address pattern = confirmed scam.
 - **Action:** IGNORE — do not reply. Blacklist pattern: [name]01001xxxx@gmail.com sending "Collab creative thought" or "Unlocking Creative Potential"
 
-#### IN-010: noblechairs — TICKET OPEN (Not partnership)
-- **Sender:** noblechairs Support <info@noblechairs.com>
-- **Subject:** [Request received]
-- **Email ID:** 42856
+#### IN-017: noblechairs — TICKET FORWARDED TO MARKETING ⏳
+- **Sender:** Matteo Monaco (noblechairs Support) <info@noblechairs.com>
+- **Subject:** [noblechairs] Subject: Partnership Proposal — Predz0rx Gaming Channel
+- **Email ID:** 42970
 - **Channel:** Predz0rx
-- **Type:** Support ticket
-- **Verdict:** ⚠️ NO VALUE
-- **Why:** General support request — auto-confirm of ticket #1995413. Not a partnership or sponsorship. Predz sent a request; waiting for agent response. NOT a confirmed collaboration.
-- **Status:** ⏳ Waiting for actual support/agent response. May convert to partnership if agent shows interest.
-- **Follow-up:** If no response by 2026-05-30 → consider follow-up or close.
+- **Type:** Hardware (Gaming chairs)
+- **Verdict:** 🟡 PENDING — Real brand response, forwarded to marketing
+- **Full Content:** Support forwarded the inquiry to the marketing team. "You will be contacted in due course should we be interested in pursuing a collaboration."
+- **Action:** Do NOT send duplicate emails. Wait for marketing response. Follow-up if no reply by 2026-06-03.
+- **Status:** ⏳ WAITING for marketing team outreach
 
-#### IN-011: Keymailer — LOW VALUE (Existing)
+#### IN-011: noblechairs — TICKET OPEN (Not partnership)
+
+#### IN-018: LIFX — NO CREATOR PROGRAM 🔵
+- **Sender:** LIFX Support <support@lifx.com>
+- **Subject:** [LIFX] Re: Propuesta de Colaboración
+- **Email ID:** 42935
+- **Channel:** PredLabs
+- **Type:** Smart lighting collaboration request
+- **Verdict:** 🔵 LOW VALUE — No formal creator program
+- **Full Content:** AI assistant STACI replied: no specific creator/influencer program exists. Highlights #LIFXLimeLight campaign but only as user-generated content via hashtag. No hardware seeding, no cash.
+- **Action:** CLOSE. PredLabs already has 43 Govee devices. LIFX does not offer creator partnerships.
+- **Status:** CLOSED
 - **Multiple IDs:** 42543, 42384, 42318, 42780, 42685, 42602, 42391, 42894
 - **Sender:** Keymailer <creator.support@keymailer.co> / <offers@keymailer.co>
 - **Type:** Game key distribution
@@ -250,11 +261,11 @@
 #### IN-012: KontrolFreek Auto-reply — TICKET CONFIRMED
 - **Sender:** KontrolFreek <support@kontrolfreek.zendesk.com>
 - **Subject:** We have received your KontrolFreek request!
-- **Email IDs:** 42896, 42870
+- **Email IDs:** 42896, 42870, 42951, 42969
 - **Channel:** Predz0rx
-- **Type:** Support ticket confirmation
-- **Verdict:** ⚠️ NO VALUE — auto-reply only
-- **Action:** Rejected response already received (IN-002 above). Tickets 370699 and 370709 confirmed. No actual sponsorship response.
+- **Type:** Support ticket confirmation / satisfaction survey
+- **Verdict:** ⚠️ NO VALUE
+- **Action:** Rejected cold pitch already received. Surveys are auto-generated.
 
 #### IN-013: Summer Game Fest — NEWSLETTER / CO-STREAM
 - **Sender:** Geoff Keighley <hello@summergamefest.com>
@@ -665,4 +676,94 @@ Total bounces since last scan: **20+ delivery failures detected.**
 ---
 
 *Mission: 1 sponsor per channel by June 24, 2026.*
-*Status: DAY 3 — Razer ✅ ACCEPTED (Trailblazer), KontrolFreek ❌ rejected + 🟡 on hold, 5 outbounds awaiting — target: complete Razer signup + follow-ups scheduled.*
+*Status: DAY 4 — Razer ✅ ACCEPTED (Trailblazer), noblechairs ⏳ forwarded to marketing, KontrolFreek ❌ rejected + 🟡 on hold, 5 outbounds awaiting — new inbox scan completed 2026-05-27.*
+
+---
+
+## 📥 INBOX SCAN FINDINGS — 2026-05-27
+
+### 📤 INBOUND — HIGH VALUE
+
+#### IN-019: Razer Welcome — PROMO (Non-Creator)
+- **Sender:** Razer <no.reply@connect.razer.com>
+- **Subject:** 🐍Welcome to Razer
+- **Email ID:** 42889
+- **Channel:** Predz0rx
+- **Type:** Welcome / Promotional email
+- **Verdict:** ⚠️ NO VALUE
+- **Why:** Generic welcome email with discount code for Razer.com purchases. Standard marketing automation. NOT the Creator Program acceptance (IN-001).
+- **Action:** Ignore.
+
+#### IN-020: noblechairs — Support forwarded to marketing ⏳
+- Already catalogued as IN-017 above.
+
+#### IN-021: LIFX — No creator program 🔵
+- Already catalogued as IN-018 above.
+
+---
+
+### 🟡 INBOUND — SUSPICIOUS / BAIT
+
+#### IN-022: SparkHub — 🟡 SUSPICIOUS (New ID confirmation)
+- **Sender:** Shanchun Ke <xiaoke@sparkhub.media>
+- **Subject:** Paid YouTube Tech Campaign
+- **Email ID:** 42661 (same as IN-008)
+- **Channel:** PredLabs
+- **Type:** Paid content ($100/video, up to 4 videos)
+- **Verdict:** 🟡 SUSPICIOUS
+- **Why:** Chinese media buyer (sparkhub.media), generic "$100/video" rate, "scripts/materials included", "no physical sample required" — classic dropshipping/scam pattern. No drone brand named. Face-cam preferred but remote-only.
+- **Red Flags:** Scripts/materials included, no sample, no brand name specified, remote-only, generic rate.
+- **Action:** NOT REPLIED — user approval required to bait or reject.
+- **Status:** PENDING USER DECISION
+
+#### IN-023: CollabOffer — 🔵 LOW VALUE
+- Already catalogued as IN-006 above.
+
+---
+
+### ⚠️ AUTO-REJECT / SPAM / NO VALUE
+
+| ID | Sender | Subject | Verdict |
+|----|--------|---------|---------|
+| 42904 | Kira de OLA | predz0rx, hoy Roblox y Free Fire tienen algo para ti | Newsletter |
+| 42931 | Razer | 💧 Razer \| Wuthering Waves Collection 🎀 | Newsletter |
+| 42920 | Razer | Just Dropped: Razer Huntsman V3 TKL 8KHz | Newsletter |
+| 42804 | PlayToEarn | Get paid even when you're not playing. | Newsletter (no value) |
+
+---
+
+### 🔴 BOUNCE DETECTED (Last 24h)
+
+#### B-013: Turtle Beach — pr@turtlebeach.com
+- **Error:** 550 5.7.133 SenderNotAuthenticatedForGroup
+- **Date:** 2026-05-24
+- **Action:** Distribution list rejects external senders. No workaround from Gmail personal. Mark as cancelled.
+- **Status:** 🚫 CANCELLED
+
+#### B-014: AOC Europe — info@aoc-europe.com
+- **Error:** 550 5.4.0 Relaying denied
+- **Date:** 2026-05-26
+- **Action:** Remote server misconfigured; rejects external relay. Find alternative contact.
+- **Status:** 🚫 CANCELLED
+
+---
+
+## 📊 STATS (UPDATED 2026-05-27)
+
+| Métrica | Valor |
+|---------|-------|
+| Total Outbounds Sent | 15+ |
+| Replies Received | 4 (Razer ✅, KontrolFreek ❌, KontrolFreek 🟡, noblechairs ⏳) |
+| Accepted/Active | 1 (Razer Creator Program — Trailblazer tier) |
+| Rejected | 1 (KontrolFreek — cold pitch) |
+| On Hold | 1 (KontrolFreek Creator Program — company-wide pause) |
+| Forwarded to Marketing | 1 (noblechairs) |
+| Bounced | 14+ |
+| Scam/Suspicious | 2 (MoClaw pending, SparkHub $100/video scam pattern) |
+| Awaiting Response | 5 (Elgato, HyperX, SteelSeries, Streamlabs, Govee[d]) |
+| Closed/Signed | 0 |
+
+---
+
+*Mission: 1 sponsor per channel by June 24, 2026.*
+*Status: DAY 4 — Razer ✅ ACCEPTED (Trailblazer), noblechairs ⏳ forwarded to marketing, KontrolFreek ❌ rejected + 🟡 on hold, 5 outbounds awaiting — target: complete Razer signup + follow-ups scheduled.*
